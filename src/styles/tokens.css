@@ -14,7 +14,11 @@
   --color-bg: var(--color-ivory);
   --color-text: var(--color-taupe);
   --color-accent: var(--color-raspberry);
-  --color-surface: color-mix(in srgb, var(--color-taupe) 5%, var(--color-ivory));
+  --color-surface: color-mix(
+    in srgb,
+    var(--color-taupe) 5%,
+    var(--color-ivory)
+  );
   --color-rule: color-mix(in srgb, var(--color-taupe) 55%, var(--color-ivory));
 
   /* Typography. Cormorant Garamond stands in for The Seasons (commercial). */

@@ -20,11 +20,18 @@ const { candle, aromaLabel } = Astro.props;
 ---
 
 <article class="card">
-  <Image src={candle.image} alt={candle.imageAlt} widths={[320, 640]} sizes="(max-width: 40rem) 100vw, 25vw" />
+  <Image
+    src={candle.image}
+    alt={candle.imageAlt}
+    widths={[320, 640]}
+    sizes="(max-width: 40rem) 100vw, 25vw"
+  />
   <div class="body">
     <p class="collection">{candle.collectionName}</p>
     <h3>{candle.name}</h3>
-    <p class="aroma"><span>{aromaLabel}:</span> {candle.aroma}</p>
+    <p class="aroma">
+      <span>{aromaLabel}:</span> {candle.aroma}
+    </p>
     <p class="phrase">“{candle.phrase}”</p>
   </div>
 </article>

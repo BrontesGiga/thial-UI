@@ -21,21 +21,26 @@ const { title, intro, thread, items } = Astro.props;
 
 <section id="collections" class="section" aria-labelledby="collections-title">
   <div>
-    <h2 id="collections-title" class="section-title">{title}</h2>
+    <h2 id="collections-title" class="section-title">
+      {title}
+    </h2>
     <p class="intro">{intro}</p>
     <ul>
-      {
-        items.map((item, i) => (
-          <li>
-            <Image src={item.image} alt={item.imageAlt} widths={[320, 640]} sizes="(max-width: 40rem) 50vw, 25vw" />
-            <span class="number" aria-hidden="true">
-              {String(i + 1).padStart(2, "0")}
-            </span>
-            <h3>{item.name}</h3>
-            <p>{item.description}</p>
-          </li>
-        ))
-      }
+      {items.map((item, i) => (
+        <li>
+          <Image
+            src={item.image}
+            alt={item.imageAlt}
+            widths={[320, 640]}
+            sizes="(max-width: 40rem) 50vw, 25vw"
+          />
+          <span class="number" aria-hidden="true">
+            {String(i + 1).padStart(2, "0")}
+          </span>
+          <h3>{item.name}</h3>
+          <p>{item.description}</p>
+        </li>
+      ))}
     </ul>
     <p class="thread">{thread}</p>
   </div>

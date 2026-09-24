@@ -7,7 +7,9 @@ for (const path of ["/", "/en/"]) {
     const results = await new AxeBuilder({ page }).analyze();
     const blocking = results.violations
       .filter((v) => v.impact === "serious" || v.impact === "critical")
-      .map((v) => `${v.id}: ${v.nodes.map((n) => n.target.join(" ")).join(", ")}`);
+      .map(
+        (v) => `${v.id}: ${v.nodes.map((n) => n.target.join(" ")).join(", ")}`,
+      );
     expect(blocking).toEqual([]);
   });
 }

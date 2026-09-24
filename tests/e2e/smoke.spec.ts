@@ -1,6 +1,13 @@
 import { expect, test } from "@playwright/test";
 
-const sectionIds = ["essence", "values", "collections", "candles", "faq", "buy"];
+const sectionIds = [
+  "essence",
+  "values",
+  "collections",
+  "candles",
+  "faq",
+  "buy",
+];
 
 for (const { path, lang, heading } of [
   { path: "/", lang: "es", heading: "Esencia de Thial" },
@@ -9,12 +16,17 @@ for (const { path, lang, heading } of [
   test.describe(`${lang} page`, () => {
     test("loads without console errors", async ({ page }) => {
       const errors: string[] = [];
-      page.on("console", (msg) => msg.type() === "error" && errors.push(msg.text()));
+      page.on(
+        "console",
+        (msg) => msg.type() === "error" && errors.push(msg.text()),
+      );
       page.on("pageerror", (err) => errors.push(err.message));
 
       await page.goto(path);
       await expect(page.locator("html")).toHaveAttribute("lang", lang);
-      await expect(page.getByRole("heading", { level: 2, name: heading })).toBeVisible();
+      await expect(
+        page.getByRole("heading", { level: 2, name: heading }),
+      ).toBeVisible();
       expect(errors).toEqual([]);
     });
 
@@ -24,7 +36,9 @@ for (const { path, lang, heading } of [
       await expect(page.locator("section.hero")).toBeVisible();
       await expect(page.locator("footer.footer")).toBeVisible();
 
-      const ids = await page.locator("main > section[id]").evaluateAll((els) => els.map((el) => el.id));
+      const ids = await page
+        .locator("main > section[id]")
+        .evaluateAll((els) => els.map((el) => el.id));
       expect(ids).toEqual(sectionIds);
     });
 
@@ -37,7 +51,9 @@ for (const { path, lang, heading } of [
     test("has no horizontal scroll on a phone", async ({ page }) => {
       await page.setViewportSize({ width: 360, height: 800 });
       await page.goto(path);
-      const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+      const overflow = await page.evaluate(
+        () => document.documentElement.scrollWidth - window.innerWidth,
+      );
       expect(overflow).toBeLessThanOrEqual(0);
     });
   });

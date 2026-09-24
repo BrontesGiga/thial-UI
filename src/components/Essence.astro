@@ -10,20 +10,22 @@ const { essence } = Astro.props;
 
 <section id="essence" class="section essence" aria-labelledby="essence-title">
   <div>
-    <h2 id="essence-title" class="section-title">{essence.title}</h2>
+    <h2 id="essence-title" class="section-title">
+      {essence.title}
+    </h2>
     <div class="intro">
-      {essence.paragraphs.map((text) => <p>{text}</p>)}
+      {essence.paragraphs.map((text) => (
+        <p>{text}</p>
+      ))}
     </div>
     <dl class="items">
-      {
-        essence.items.map((item) => (
-          <div class="item">
-            <dt>{item.title}</dt>
-            <Divider vertical />
-            <dd>{item.text}</dd>
-          </div>
-        ))
-      }
+      {essence.items.map((item) => (
+        <div class="item">
+          <dt>{item.title}</dt>
+          <Divider vertical />
+          <dd>{item.text}</dd>
+        </div>
+      ))}
     </dl>
     <blockquote>
       <p>“{essence.quote}”</p>

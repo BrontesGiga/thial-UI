@@ -19,7 +19,9 @@ const { hero } = Astro.props;
     <p class="tagline">{hero.tagline}</p>
     <p class="concept">{hero.concept}</p>
     <p class="intro">{hero.intro}</p>
-    <a class="cta" href="#collections">{hero.cta}</a>
+    <a class="cta" href="#collections">
+      {hero.cta}
+    </a>
   </div>
   <Image
     class="photo"

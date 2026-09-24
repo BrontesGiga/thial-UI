@@ -1,6 +1,6 @@
 # Spec: Thial Brand Landing (v1)
 
-Status: DRAFT — awaiting review
+Status: Approved — v1 implemented (branch `feat/landing-v1`)
 Source of truth for brand rules: `docs/brand/manual-de-marca-thial.pdf`
 
 ## Objective
@@ -55,12 +55,12 @@ analytics, contact forms.
 | `--color-sage` | `#68766B` | Secondary accent (nature) |
 | `--color-lilac` | `#c28ec1` | Accent (emotion) |
 | `--color-sky` | `#ace8f5` | Accent (freshness) |
-| `--color-gold` | TBD (≈ `#b8943f`) | Fine details only (rules, icons) |
+| `--color-gold` | `#a8863a` (approximate) | Fine details only (rules, icons) |
 
 - **Display font:** The Seasons (commercial). v1 uses a free look-alike
   (Cormorant Garamond, self-hosted) until an Adobe Fonts kit is available.
 - **Secondary font:** Prata (free, self-hosted via Fontsource).
-- **Body font:** readable serif for long text (proposal: Lora — see Open Questions).
+- **Body font:** Lora (self-hosted), for long paragraphs.
 - **Layout language:** generous white space, thin 1px taupe rules, numbered items,
   centered editorial blocks, soft warm photography. No saturation, no clutter.
 - **Voice rules (apply to all copy, both languages):** sensitive, warm, simple elegance.
@@ -108,6 +108,7 @@ thial-ui/
 │   │   ├── candles/           # one .md/.json per candle, es + en fields
 │   │   └── collections/       # personas, lugares, momentos, experiencias
 │   ├── content.config.ts      # Zod schemas for content collections
+│   ├── config/links.ts        # Instagram / WhatsApp links
 │   ├── i18n/
 │   │   ├── es.json            # UI strings (Spanish)
 │   │   ├── en.json            # UI strings (English)
@@ -225,20 +226,29 @@ No coverage target in v1 (logic is thin); the key-parity test is required.
 9. Lighthouse (local, desktop) Performance ≥ 90 and Accessibility ≥ 95.
 10. The site works offline after `npm install` (fonts self-hosted, no CDN).
 
+## Decisions (resolved open questions)
+
+1. **Logo:** from the Thial Google Drive (`Logo/LOGO THIAL.pdf`), converted to a vector SVG
+   with `fill="currentColor"` → `src/assets/logo/thial-logo.svg`. The favicon is the flame
+   from the same paths (`public/favicon.svg`). PNG variants and the source PDF live in
+   `docs/brand/logo/`. Note: the logo file uses `#af3272`, the manual palette says `#b03b7a`;
+   the site uses `#b03b7a`.
+2. **Fonts:** Cormorant Garamond (display, stand-in for The Seasons) + Prata (secondary) +
+   Lora (body), latin subsets, self-hosted via Fontsource.
+3. **Gold:** no exact value in the manual; `#a8863a` is sampled from the manual's gold swatch.
+   Replace when the designer confirms a hex.
+4. **Photos:** placeholders cropped from the manual (cover, moodboard, Instagram grid).
+   The moodboard sources are low resolution; replace with real product photos.
+5. **Candles & FAQ:** 8 placeholder candles (`placeholder: true`) and 5 FAQ items written in
+   the brand voice. The page shows a small note while any candle is a placeholder.
+6. **Buy links:** `#` placeholders in `src/config/links.ts`.
+7. **English copy:** translated from the manual's Spanish, following the voice rules.
+8. **Founder story (p.11):** left out of v1.
+9. **Git:** the manual, logo sources and stationery (`tarjeta`, `hoja membrete`) are committed
+   under `docs/brand/`.
+
 ## Open Questions
 
-1. **Logo file:** please add the Thial logo (SVG preferred) to `src/assets/logo/`, or tell me
-   its path. Do you also have a monogram/icon version for the favicon?
-2. **Body font:** the manual lists only The Seasons + Prata. Is Lora (or similar) OK for
-   long paragraphs, or should body text use Prata?
-3. **The Seasons fallback:** is Cormorant Garamond acceptable until you have an Adobe Fonts kit?
-4. **Gold hex:** the manual shows gold only as an image. Do you have an exact value?
-5. **Photos:** OK to crop images from the PDF (cover candle, moodboard) as placeholders?
-6. **Candles & FAQ content:** I'll write placeholder candles (2 per collection) and FAQ in
-   the brand voice, clearly marked as placeholders. OK?
-7. **Buy links:** Instagram handle and WhatsApp number (or leave `#` placeholders)?
-8. **English copy:** I translate from the manual's Spanish, keeping the voice rules — OK, or
-   will you provide English text?
-9. **Founder story (manual p.11):** include a short, softened "Historia de origen" section, or
-   leave it out of v1?
-10. **Git:** should the brand manual PDF be committed, or added to `.gitignore`?
+1. Real Instagram handle and WhatsApp number.
+2. Real candle list (names, scents, phrases, cards) and product photos.
+3. Exact gold hex, and whether to license The Seasons (Adobe Fonts) for the web.

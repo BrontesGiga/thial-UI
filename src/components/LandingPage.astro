@@ -10,7 +10,12 @@ import Candles from "./Candles.astro";
 import Faq from "./Faq.astro";
 import HowToBuy from "./HowToBuy.astro";
 import Footer from "./Footer.astro";
-import { getDictionary, localizedPath, otherLocale, type Locale } from "../i18n/utils";
+import {
+  getDictionary,
+  localizedPath,
+  otherLocale,
+  type Locale,
+} from "../i18n/utils";
 
 interface Props {
   locale: Locale;
@@ -19,7 +24,9 @@ const { locale } = Astro.props;
 const t = getDictionary(locale);
 const switchLang = otherLocale(locale);
 
-const storyCollections = (await getCollection("collections")).sort((a, b) => a.data.order - b.data.order);
+const storyCollections = (await getCollection("collections")).sort(
+  (a, b) => a.data.order - b.data.order,
+);
 const collectionItems = storyCollections.map(({ id, data }) => ({
   id,
   name: data.name[locale],
@@ -28,7 +35,9 @@ const collectionItems = storyCollections.map(({ id, data }) => ({
   imageAlt: data.imageAlt[locale],
 }));
 
-const candles = (await getCollection("candles")).sort((a, b) => a.data.order - b.data.order);
+const candles = (await getCollection("candles")).sort(
+  (a, b) => a.data.order - b.data.order,
+);
 const candleItems = await Promise.all(
   candles.map(async ({ id, data }) => {
     const collection = await getEntry(data.collection);
@@ -46,7 +55,11 @@ const candleItems = await Promise.all(
 const hasPlaceholders = candles.some(({ data }) => data.placeholder);
 ---
 
-<BaseLayout locale={locale} title={t.meta.title} description={t.meta.description}>
+<BaseLayout
+  locale={locale}
+  title={t.meta.title}
+  description={t.meta.description}
+>
   <Header
     nav={t.nav}
     homeHref={localizedPath(locale)}
@@ -63,7 +76,11 @@ const hasPlaceholders = candles.some(({ data }) => data.placeholder);
       thread={t.collections.thread}
       items={collectionItems}
     />
-    <Candles candles={t.candles} items={candleItems} hasPlaceholders={hasPlaceholders} />
+    <Candles
+      candles={t.candles}
+      items={candleItems}
+      hasPlaceholders={hasPlaceholders}
+    />
     <Faq faq={t.faq} />
     <HowToBuy buy={t.buy} />
   </main>

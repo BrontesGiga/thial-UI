@@ -20,7 +20,9 @@ const items = [
 ];
 ---
 
-<a class="skip-link" href="#main">{nav.skip}</a>
+<a class="skip-link" href="#main">
+  {nav.skip}
+</a>
 <header class="header">
   <div class="inner">
     <a class="home" href={homeHref} aria-label={nav.homeLabel}>
@@ -35,7 +37,14 @@ const items = [
         ))}
       </ul>
     </nav>
-    <a class="lang" href={switchHref} hreflang={switchLang} lang={switchLang} aria-label={nav.switchLabel} data-lang-switch>
+    <a
+      class="lang"
+      href={switchHref}
+      hreflang={switchLang}
+      lang={switchLang}
+      aria-label={nav.switchLabel}
+      data-lang-switch
+    >
       {nav.switchTo}
     </a>
   </div>
@@ -43,10 +52,12 @@ const items = [
 
 <script>
   // Keep the current section when switching language.
-  document.querySelector<HTMLAnchorElement>("[data-lang-switch]")?.addEventListener("click", (event) => {
-    const link = event.currentTarget as HTMLAnchorElement;
-    if (location.hash) link.hash = location.hash;
-  });
+  document
+    .querySelector<HTMLAnchorElement>("[data-lang-switch]")
+    ?.addEventListener("click", (event) => {
+      const link = event.currentTarget as HTMLAnchorElement;
+      if (location.hash) link.hash = location.hash;
+    });
 </script>
 
 <style>

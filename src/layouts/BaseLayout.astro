@@ -28,12 +28,18 @@ const canonical = new URL(localizedPath(locale), Astro.site);
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={canonical} />
-    {
-      locales.map((l) => (
-        <link rel="alternate" hreflang={l} href={new URL(localizedPath(l), Astro.site)} />
-      ))
-    }
-    <link rel="alternate" hreflang="x-default" href={new URL(localizedPath("es"), Astro.site)} />
+    {locales.map((l) => (
+      <link
+        rel="alternate"
+        hreflang={l}
+        href={new URL(localizedPath(l), Astro.site)}
+      />
+    ))}
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href={new URL(localizedPath("es"), Astro.site)}
+    />
   </head>
   <body>
     <slot />

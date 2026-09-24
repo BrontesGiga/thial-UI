@@ -52,7 +52,9 @@ describe("useTranslations", () => {
   });
 
   it("throws on a missing key so gaps fail the build", () => {
-    expect(() => useTranslations("es")("hero.missing")).toThrow(/hero\.missing/);
+    expect(() => useTranslations("es")("hero.missing")).toThrow(
+      /hero\.missing/,
+    );
   });
 });
 
@@ -69,7 +71,12 @@ describe("dictionaries", () => {
   it("has no empty strings", () => {
     for (const dict of [es, en]) {
       const empty = collectKeys(dict).filter((key) => {
-        const value = key.split(".").reduce<unknown>((node, part) => (node as Record<string, unknown>)[part], dict);
+        const value = key
+          .split(".")
+          .reduce<unknown>(
+            (node, part) => (node as Record<string, unknown>)[part],
+            dict,
+          );
         return typeof value === "string" && value.trim() === "";
       });
       expect(empty).toEqual([]);

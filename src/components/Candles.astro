@@ -12,17 +12,17 @@ const { candles, items, hasPlaceholders } = Astro.props;
 
 <section id="candles" class="section candles" aria-labelledby="candles-title">
   <div>
-    <h2 id="candles-title" class="section-title">{candles.title}</h2>
+    <h2 id="candles-title" class="section-title">
+      {candles.title}
+    </h2>
     <p class="question">{candles.question}</p>
     <p class="intro">{candles.intro}</p>
     <ul>
-      {
-        items.map((candle) => (
-          <li>
-            <CandleCard candle={candle} aromaLabel={candles.aromaLabel} />
-          </li>
-        ))
-      }
+      {items.map((candle) => (
+        <li>
+          <CandleCard candle={candle} aromaLabel={candles.aromaLabel} />
+        </li>
+      ))}
     </ul>
     {hasPlaceholders && <p class="note">{candles.placeholderNote}</p>}
   </div>

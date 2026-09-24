@@ -14,10 +14,16 @@ const year = new Date().getFullYear();
   <Logo class="logo" aria-hidden="true" />
   <p class="tagline">{footer.tagline}</p>
   <ul>
-    <li><a href={links.instagram}>Instagram</a></li>
-    <li><a href={links.whatsapp}>WhatsApp</a></li>
+    <li>
+      <a href={links.instagram}>Instagram</a>
+    </li>
+    <li>
+      <a href={links.whatsapp}>WhatsApp</a>
+    </li>
   </ul>
-  <p class="rights">© {year} Thial. {footer.rights}</p>
+  <p class="rights">
+    © {year} Thial. {footer.rights}
+  </p>
 </footer>
 
 <style>

@@ -37,7 +37,10 @@ export function useTranslations(locale: Locale) {
   return (key: string): string => {
     const value = key
       .split(".")
-      .reduce<unknown>((node, part) => (node as Record<string, unknown> | undefined)?.[part], dict);
+      .reduce<unknown>(
+        (node, part) => (node as Record<string, unknown> | undefined)?.[part],
+        dict,
+      );
     if (typeof value !== "string") {
       throw new Error(`Missing translation "${key}" for locale "${locale}"`);
     }
@@ -49,6 +52,8 @@ export function useTranslations(locale: Locale) {
 export function collectKeys(node: unknown, prefix = ""): string[] {
   if (node === null || typeof node !== "object") return [prefix];
   return Object.entries(node as Record<string, unknown>)
-    .flatMap(([key, child]) => collectKeys(child, prefix ? `${prefix}.${key}` : key))
+    .flatMap(([key, child]) =>
+      collectKeys(child, prefix ? `${prefix}.${key}` : key),
+    )
     .sort();
 }

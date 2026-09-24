@@ -10,20 +10,20 @@ const { values } = Astro.props;
 
 <section id="values" class="section values" aria-labelledby="values-title">
   <div>
-    <h2 id="values-title" class="section-title">{values.title}</h2>
+    <h2 id="values-title" class="section-title">
+      {values.title}
+    </h2>
     <ol>
-      {
-        values.items.map((item, i) => (
-          <li>
-            <span class="number" aria-hidden="true">
-              {String(i + 1).padStart(2, "0")}
-            </span>
-            <Divider vertical />
-            <h3>{item.name}</h3>
-            <p>{item.text}</p>
-          </li>
-        ))
-      }
+      {values.items.map((item, i) => (
+        <li>
+          <span class="number" aria-hidden="true">
+            {String(i + 1).padStart(2, "0")}
+          </span>
+          <Divider vertical />
+          <h3>{item.name}</h3>
+          <p>{item.text}</p>
+        </li>
+      ))}
     </ol>
   </div>
 </section>

@@ -11,25 +11,29 @@ const { buy } = Astro.props;
 
 <section id="buy" class="section buy" aria-labelledby="buy-title">
   <div>
-    <h2 id="buy-title" class="section-title">{buy.title}</h2>
+    <h2 id="buy-title" class="section-title">
+      {buy.title}
+    </h2>
     <p class="intro">{buy.intro}</p>
     <ol>
-      {
-        buy.steps.map((step, i) => (
-          <li>
-            <span class="number" aria-hidden="true">
-              {String(i + 1).padStart(2, "0")}
-            </span>
-            <Divider vertical />
-            <h3>{step.title}</h3>
-            <p>{step.text}</p>
-          </li>
-        ))
-      }
+      {buy.steps.map((step, i) => (
+        <li>
+          <span class="number" aria-hidden="true">
+            {String(i + 1).padStart(2, "0")}
+          </span>
+          <Divider vertical />
+          <h3>{step.title}</h3>
+          <p>{step.text}</p>
+        </li>
+      ))}
     </ol>
     <div class="actions">
-      <a class="button" href={links.instagram}>{buy.instagram}</a>
-      <a class="button" href={links.whatsapp}>{buy.whatsapp}</a>
+      <a class="button" href={links.instagram}>
+        {buy.instagram}
+      </a>
+      <a class="button" href={links.whatsapp}>
+        {buy.whatsapp}
+      </a>
     </div>
   </div>
 </section>
