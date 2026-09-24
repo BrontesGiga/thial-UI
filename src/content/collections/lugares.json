@@ -1,0 +1,16 @@
+{
+  "order": 2,
+  "name": {
+    "es": "Lugares",
+    "en": "Places"
+  },
+  "description": {
+    "es": "Historias de lugares que despertaron algo.",
+    "en": "Stories of places that awakened something."
+  },
+  "image": "../../assets/images/mood-lake.webp",
+  "imageAlt": {
+    "es": "Lago en calma al atardecer, con montañas al fondo.",
+    "en": "A calm lake at dusk, with mountains in the distance."
+  }
+}

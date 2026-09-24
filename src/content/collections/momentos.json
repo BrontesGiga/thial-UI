@@ -1,0 +1,16 @@
+{
+  "order": 3,
+  "name": {
+    "es": "Momentos",
+    "en": "Moments"
+  },
+  "description": {
+    "es": "Historias de instantes que merecen permanecer.",
+    "en": "Stories of instants worth keeping."
+  },
+  "image": "../../assets/images/mood-candle-bowl.webp",
+  "imageAlt": {
+    "es": "Vela encendida dentro de un cuenco con pétalos.",
+    "en": "A lit candle inside a bowl with petals."
+  }
+}

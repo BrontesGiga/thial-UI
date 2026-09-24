@@ -1,0 +1,16 @@
+{
+  "order": 1,
+  "name": {
+    "es": "Personas",
+    "en": "People"
+  },
+  "description": {
+    "es": "Historias de quienes dejaron algo en mí.",
+    "en": "Stories of the people who left something in me."
+  },
+  "image": "../../assets/images/mood-letter.webp",
+  "imageAlt": {
+    "es": "Carta cerrada con un cordel sobre una tela clara.",
+    "en": "A letter tied with string on a light fabric."
+  }
+}

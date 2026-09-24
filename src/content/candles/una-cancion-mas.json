@@ -1,0 +1,22 @@
+{
+  "order": 6,
+  "collection": "momentos",
+  "name": {
+    "es": "Una canción más",
+    "en": "One More Song"
+  },
+  "aroma": {
+    "es": "Cítricos y pimienta rosa",
+    "en": "Citrus and pink pepper"
+  },
+  "phrase": {
+    "es": "A veces basta una canción para cambiar el día.",
+    "en": "Sometimes one song is enough to change the day."
+  },
+  "image": "../../assets/images/hero-candle.webp",
+  "imageAlt": {
+    "es": "Vela Thial encendida en un recipiente de cerámica pintado a mano.",
+    "en": "A lit Thial candle in a hand-painted ceramic vessel."
+  },
+  "placeholder": true
+}

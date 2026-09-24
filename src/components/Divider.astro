@@ -1,0 +1,23 @@
+---
+interface Props {
+  vertical?: boolean;
+}
+const { vertical = false } = Astro.props;
+---
+
+<span class:list={["divider", { vertical }]} aria-hidden="true"></span>
+
+<style>
+  .divider {
+    display: block;
+    width: 100%;
+    border-top: var(--rule);
+  }
+  .vertical {
+    width: 0;
+    height: 3rem;
+    margin-inline: auto;
+    border-top: 0;
+    border-left: var(--rule);
+  }
+</style>

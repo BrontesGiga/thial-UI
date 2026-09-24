@@ -1,0 +1,22 @@
+{
+  "order": 5,
+  "collection": "momentos",
+  "name": {
+    "es": "Primera infusión",
+    "en": "First Infusion"
+  },
+  "aroma": {
+    "es": "Manzanilla y miel",
+    "en": "Chamomile and honey"
+  },
+  "phrase": {
+    "es": "Los instantes pequeños también merecen permanecer.",
+    "en": "Small moments deserve to stay too."
+  },
+  "image": "../../assets/images/candle-jar-lit.webp",
+  "imageAlt": {
+    "es": "Vela Thial encendida en frasco de vidrio junto a flores.",
+    "en": "A lit Thial candle in a glass jar beside flowers."
+  },
+  "placeholder": true
+}

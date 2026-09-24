@@ -1,0 +1,16 @@
+{
+  "order": 4,
+  "name": {
+    "es": "Experiencias",
+    "en": "Experiences"
+  },
+  "description": {
+    "es": "Historias de aquello que me transformó.",
+    "en": "Stories of what transformed me."
+  },
+  "image": "../../assets/images/mood-flowers.webp",
+  "imageAlt": {
+    "es": "Flores silvestres con sombras suaves sobre una pared.",
+    "en": "Wildflowers casting soft shadows on a wall."
+  }
+}

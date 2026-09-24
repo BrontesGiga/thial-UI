@@ -1,0 +1,22 @@
+{
+  "order": 2,
+  "collection": "personas",
+  "name": {
+    "es": "Carta sin enviar",
+    "en": "Unsent Letter"
+  },
+  "aroma": {
+    "es": "Té blanco y papel antiguo",
+    "en": "White tea and old paper"
+  },
+  "phrase": {
+    "es": "Lo que aprendimos de alguien también es parte de nuestra historia.",
+    "en": "What we learned from someone is also part of our story."
+  },
+  "image": "../../assets/images/candle-card-bouquet.webp",
+  "imageAlt": {
+    "es": "Tarjeta Thial atada con cordel junto a un ramo de flores y una vela.",
+    "en": "A Thial card tied with string beside a bouquet and a candle."
+  },
+  "placeholder": true
+}

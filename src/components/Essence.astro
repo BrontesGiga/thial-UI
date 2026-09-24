@@ -1,0 +1,66 @@
+---
+import Divider from "./Divider.astro";
+import type { Dictionary } from "../i18n/utils";
+
+interface Props {
+  essence: Dictionary["essence"];
+}
+const { essence } = Astro.props;
+---
+
+<section id="essence" class="section essence" aria-labelledby="essence-title">
+  <div>
+    <h2 id="essence-title" class="section-title">{essence.title}</h2>
+    <div class="intro">
+      {essence.paragraphs.map((text) => <p>{text}</p>)}
+    </div>
+    <dl class="items">
+      {
+        essence.items.map((item) => (
+          <div class="item">
+            <dt>{item.title}</dt>
+            <Divider vertical />
+            <dd>{item.text}</dd>
+          </div>
+        ))
+      }
+    </dl>
+    <blockquote>
+      <p>“{essence.quote}”</p>
+    </blockquote>
+  </div>
+</section>
+
+<style>
+  .intro {
+    display: grid;
+    gap: var(--space-s);
+    max-width: var(--measure);
+    margin-inline: auto;
+    text-align: center;
+  }
+  .items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    gap: var(--space-l);
+    margin-top: var(--space-xl);
+    text-align: center;
+  }
+  dt {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+  }
+  dd {
+    margin-top: var(--space-s);
+  }
+  blockquote {
+    max-width: var(--measure);
+    margin: var(--space-xl) auto 0;
+    padding-top: var(--space-l);
+    border-top: var(--rule);
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--text-xl);
+    text-align: center;
+  }
+</style>

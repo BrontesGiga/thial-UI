@@ -1,0 +1,71 @@
+---
+import { getCollection, getEntry } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "./Header.astro";
+import Hero from "./Hero.astro";
+import Essence from "./Essence.astro";
+import Values from "./Values.astro";
+import Collections from "./Collections.astro";
+import Candles from "./Candles.astro";
+import Faq from "./Faq.astro";
+import HowToBuy from "./HowToBuy.astro";
+import Footer from "./Footer.astro";
+import { getDictionary, localizedPath, otherLocale, type Locale } from "../i18n/utils";
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = getDictionary(locale);
+const switchLang = otherLocale(locale);
+
+const storyCollections = (await getCollection("collections")).sort((a, b) => a.data.order - b.data.order);
+const collectionItems = storyCollections.map(({ id, data }) => ({
+  id,
+  name: data.name[locale],
+  description: data.description[locale],
+  image: data.image,
+  imageAlt: data.imageAlt[locale],
+}));
+
+const candles = (await getCollection("candles")).sort((a, b) => a.data.order - b.data.order);
+const candleItems = await Promise.all(
+  candles.map(async ({ id, data }) => {
+    const collection = await getEntry(data.collection);
+    return {
+      id,
+      name: data.name[locale],
+      collectionName: collection?.data.name[locale] ?? "",
+      aroma: data.aroma[locale],
+      phrase: data.phrase[locale],
+      image: data.image,
+      imageAlt: data.imageAlt[locale],
+    };
+  }),
+);
+const hasPlaceholders = candles.some(({ data }) => data.placeholder);
+---
+
+<BaseLayout locale={locale} title={t.meta.title} description={t.meta.description}>
+  <Header
+    nav={t.nav}
+    homeHref={localizedPath(locale)}
+    switchHref={localizedPath(switchLang)}
+    switchLang={switchLang}
+  />
+  <main id="main">
+    <Hero hero={t.hero} />
+    <Essence essence={t.essence} />
+    <Values values={t.values} />
+    <Collections
+      title={t.collections.title}
+      intro={t.collections.intro}
+      thread={t.collections.thread}
+      items={collectionItems}
+    />
+    <Candles candles={t.candles} items={candleItems} hasPlaceholders={hasPlaceholders} />
+    <Faq faq={t.faq} />
+    <HowToBuy buy={t.buy} />
+  </main>
+  <Footer footer={t.footer} />
+</BaseLayout>

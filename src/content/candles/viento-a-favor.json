@@ -1,0 +1,22 @@
+{
+  "order": 7,
+  "collection": "experiencias",
+  "name": {
+    "es": "Viento a favor",
+    "en": "Tailwind"
+  },
+  "aroma": {
+    "es": "Eucalipto y salvia",
+    "en": "Eucalyptus and sage"
+  },
+  "phrase": {
+    "es": "Lo que nos cambia también nos enseña.",
+    "en": "What changes us also teaches us."
+  },
+  "image": "../../assets/images/mood-jar.webp",
+  "imageAlt": {
+    "es": "Frasco de vela Thial con tapa de madera al aire libre.",
+    "en": "A Thial candle jar with a wooden lid outdoors."
+  },
+  "placeholder": true
+}

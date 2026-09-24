@@ -1,0 +1,46 @@
+/* Thial brand tokens. Source: docs/brand/manual-de-marca-thial.pdf (Paleta de colores, Tipografías).
+   Only this file may contain raw color values. */
+:root {
+  /* Palette */
+  --color-ivory: #fff9f4;
+  --color-taupe: #6b5d5d;
+  --color-raspberry: #b03b7a;
+  --color-sage: #68766b;
+  --color-lilac: #c28ec1; /* decorative only: 2.5:1 on ivory */
+  --color-sky: #ace8f5; /* decorative only */
+  --color-gold: #a8863a; /* approximate, sampled from the manual's gold swatch */
+
+  /* Derived surfaces */
+  --color-bg: var(--color-ivory);
+  --color-text: var(--color-taupe);
+  --color-accent: var(--color-raspberry);
+  --color-surface: color-mix(in srgb, var(--color-taupe) 5%, var(--color-ivory));
+  --color-rule: color-mix(in srgb, var(--color-taupe) 55%, var(--color-ivory));
+
+  /* Typography. Cormorant Garamond stands in for The Seasons (commercial). */
+  --font-display: "Cormorant Garamond", "Times New Roman", serif;
+  --font-secondary: "Prata", Georgia, serif;
+  --font-body: "Lora", Georgia, serif;
+
+  --text-sm: 0.9375rem;
+  --text-base: 1.0625rem;
+  --text-lg: 1.25rem;
+  --text-xl: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+  --text-2xl: clamp(2.25rem, 1.6rem + 2.6vw, 3.5rem);
+  --text-3xl: clamp(2.75rem, 1.8rem + 4vw, 5rem);
+
+  /* Spacing */
+  --space-2xs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-s: 1rem;
+  --space-m: 1.5rem;
+  --space-l: 2.5rem;
+  --space-xl: clamp(3.5rem, 2.5rem + 4vw, 6rem);
+
+  /* Layout */
+  --measure: 38rem;
+  --page-max: 72rem;
+  --gutter: clamp(1rem, 0.5rem + 2.5vw, 2.5rem);
+  --rule: 1px solid var(--color-rule);
+  --radius: 999px;
+}

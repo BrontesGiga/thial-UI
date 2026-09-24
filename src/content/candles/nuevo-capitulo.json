@@ -1,0 +1,22 @@
+{
+  "order": 8,
+  "collection": "experiencias",
+  "name": {
+    "es": "Nuevo capítulo",
+    "en": "New Chapter"
+  },
+  "aroma": {
+    "es": "Lavanda y cedro",
+    "en": "Lavender and cedar"
+  },
+  "phrase": {
+    "es": "Hay capítulos que empiezan cuando otros terminan.",
+    "en": "Some chapters begin where others end."
+  },
+  "image": "../../assets/images/mood-candle-bowl.webp",
+  "imageAlt": {
+    "es": "Vela encendida dentro de un cuenco con pétalos.",
+    "en": "A lit candle inside a bowl with petals."
+  },
+  "placeholder": true
+}
