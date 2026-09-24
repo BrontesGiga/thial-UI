@@ -1,0 +1,22 @@
+{
+  "order": 4,
+  "collection": "lugares",
+  "name": {
+    "es": "Jardín con fuente",
+    "en": "Garden Fountain"
+  },
+  "aroma": {
+    "es": "Flores blancas y hojas verdes",
+    "en": "White flowers and green leaves"
+  },
+  "phrase": {
+    "es": "Un jardín, el agua y la calma de quedarse un rato.",
+    "en": "A garden, water and the calm of staying a while."
+  },
+  "image": "../../assets/images/candle-top-botanical.webp",
+  "imageAlt": {
+    "es": "Vela vista desde arriba con flores secas en la cera, entre hojas y flores.",
+    "en": "A candle seen from above with dried flowers in the wax, among leaves and blossoms."
+  },
+  "placeholder": true
+}

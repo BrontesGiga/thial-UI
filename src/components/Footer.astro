@@ -1,0 +1,58 @@
+---
+import Logo from "../assets/logo/thial-logo.svg";
+import { links } from "../config/links";
+import type { Dictionary } from "../i18n/utils";
+
+interface Props {
+  footer: Dictionary["footer"];
+}
+const { footer } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <Logo class="logo" aria-hidden="true" />
+  <p class="tagline">{footer.tagline}</p>
+  <ul>
+    <li>
+      <a href={links.instagram}>Instagram</a>
+    </li>
+    <li>
+      <a href={links.whatsapp}>WhatsApp</a>
+    </li>
+  </ul>
+  <p class="rights">
+    © {year} Thial. {footer.rights}
+  </p>
+</footer>
+
+<style>
+  .footer {
+    display: grid;
+    justify-items: center;
+    gap: var(--space-s);
+    padding: var(--space-xl) var(--gutter) var(--space-l);
+    border-top: var(--rule);
+    text-align: center;
+  }
+  .logo {
+    width: 7rem;
+    color: var(--color-raspberry);
+  }
+  .tagline {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--text-lg);
+  }
+  ul {
+    display: flex;
+    gap: var(--space-m);
+    padding: 0;
+    list-style: none;
+    font-family: var(--font-secondary);
+    font-size: var(--text-sm);
+  }
+  .rights {
+    font-size: var(--text-sm);
+  }
+</style>

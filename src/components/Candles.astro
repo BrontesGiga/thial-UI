@@ -1,0 +1,60 @@
+---
+import CandleCard, { type CandleItem } from "./CandleCard.astro";
+import type { Dictionary } from "../i18n/utils";
+
+interface Props {
+  candles: Dictionary["candles"];
+  items: CandleItem[];
+  hasPlaceholders: boolean;
+}
+const { candles, items, hasPlaceholders } = Astro.props;
+---
+
+<section id="candles" class="section candles" aria-labelledby="candles-title">
+  <div>
+    <h2 id="candles-title" class="section-title">
+      {candles.title}
+    </h2>
+    <p class="question">{candles.question}</p>
+    <p class="intro">{candles.intro}</p>
+    <ul>
+      {items.map((candle) => (
+        <li>
+          <CandleCard candle={candle} aromaLabel={candles.aromaLabel} />
+        </li>
+      ))}
+    </ul>
+    {hasPlaceholders && <p class="note">{candles.placeholderNote}</p>}
+  </div>
+</section>
+
+<style>
+  .candles {
+    background: var(--color-surface);
+  }
+  .question {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--text-xl);
+    text-align: center;
+  }
+  .intro,
+  .note {
+    max-width: var(--measure);
+    margin: var(--space-s) auto 0;
+    text-align: center;
+  }
+  .note {
+    margin-top: var(--space-l);
+    font-size: var(--text-sm);
+    font-style: italic;
+  }
+  ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    gap: var(--space-m);
+    margin-top: var(--space-l);
+    padding: 0;
+    list-style: none;
+  }
+</style>

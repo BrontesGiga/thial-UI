@@ -1,0 +1,138 @@
+{
+  "meta": {
+    "title": "Thial · Handmade candles that turn stories into scents",
+    "description": "Thial makes handmade candles inspired by people, places, moments and experiences. Stories you can feel."
+  },
+  "nav": {
+    "label": "Main navigation",
+    "skip": "Skip to content",
+    "essence": "Essence",
+    "values": "Values",
+    "collections": "Collections",
+    "candles": "Candles",
+    "faq": "FAQ",
+    "buy": "How to buy",
+    "switchTo": "Español",
+    "switchLabel": "View this page in Spanish",
+    "homeLabel": "Thial, home"
+  },
+  "hero": {
+    "tagline": "Stories you can feel.",
+    "concept": "Your story is still being written.",
+    "intro": "We make handmade candles that turn stories, places and moments into scents.",
+    "cta": "Discover the collections",
+    "imageAlt": "A lit Thial candle in a hand-painted ceramic vessel, next to its box."
+  },
+  "essence": {
+    "title": "The essence of Thial",
+    "paragraphs": [
+      "Thial was born from one idea: our story is made of moments that change us. Of people, places, experiences and instants that leave a mark and become memories.",
+      "We want everyone who lights a candle to find something of their own: a memory, a feeling, a place, someone special, or simply a sensation that is hard to explain."
+    ],
+    "quote": "The story belongs to Thial, but its meaning can belong to whoever receives it.",
+    "items": [
+      {
+        "title": "Concept",
+        "text": "Your story is still being written."
+      },
+      {
+        "title": "Philosophy",
+        "text": "Learning to live while we keep discovering who we are."
+      },
+      {
+        "title": "Purpose",
+        "text": "Letting memories, experiences and lessons be felt again through scent, leaving room for each person to find something of their own."
+      },
+      {
+        "title": "Promise",
+        "text": "To inspire you to look at what you have lived, discover what it left you, and keep writing your own story."
+      }
+    ]
+  },
+  "values": {
+    "title": "Our values",
+    "items": [
+      {
+        "name": "Connection",
+        "text": "The bridge between Thial's story and the personal story of whoever experiences the scent."
+      },
+      {
+        "name": "Authenticity",
+        "text": "Our collections come from real stories and experiences, told from a genuine place."
+      },
+      {
+        "name": "Creativity",
+        "text": "We turn stories, places and emotions into scents and experiences that can be felt."
+      },
+      {
+        "name": "Sensitivity",
+        "text": "We notice and value the small moments that can become memories."
+      },
+      {
+        "name": "Meaning",
+        "text": "Each candle is more than pretty or fragrant: it has something to tell and something to leave."
+      }
+    ]
+  },
+  "collections": {
+    "title": "Collections",
+    "intro": "We organise our candles by where their stories come from.",
+    "thread": "From this person I learned… / This experience left me…"
+  },
+  "candles": {
+    "title": "Candles",
+    "question": "What story does this scent remind you of?",
+    "intro": "Each candle has a name, a scent, a phrase and a card that tells what inspired it.",
+    "aromaLabel": "Scent",
+    "placeholderNote": "Sample names and scents while we prepare the collections."
+  },
+  "faq": {
+    "title": "Frequently asked questions",
+    "items": [
+      {
+        "question": "Are the candles personalised?",
+        "answer": "No. Each story comes from Thial and from the experiences that inspired its founder. Whoever receives the candle may find their own connection in it."
+      },
+      {
+        "question": "What comes with each candle?",
+        "answer": "Each candle comes with its name, its scent, a short phrase and a card that tells what inspired it and what that story left behind."
+      },
+      {
+        "question": "How are the collections organised?",
+        "answer": "By where their stories come from: people, places, moments and experiences."
+      },
+      {
+        "question": "How do I care for my candle?",
+        "answer": "On the first burn, let the wax melt all the way to the edges. Trim the wick before each use and never leave a lit candle unattended."
+      },
+      {
+        "question": "How do I place an order?",
+        "answer": "Message us on Instagram or WhatsApp. We will tell you which candles are available and the delivery options."
+      }
+    ]
+  },
+  "buy": {
+    "title": "How to buy",
+    "intro": "For now, we handle every order personally.",
+    "steps": [
+      {
+        "title": "Choose your candle",
+        "text": "Explore the collections and find the story that speaks to you."
+      },
+      {
+        "title": "Message us",
+        "text": "Send us a message on Instagram or WhatsApp with the candle you chose."
+      },
+      {
+        "title": "Receive it",
+        "text": "We agree on payment and delivery together."
+      }
+    ],
+    "instagram": "Message us on Instagram",
+    "whatsapp": "Message us on WhatsApp"
+  },
+  "footer": {
+    "tagline": "Stories you can feel.",
+    "rights": "All rights reserved."
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "order": 1,
+  "collection": "personas",
+  "name": {
+    "es": "Abrazo de domingo",
+    "en": "Sunday Embrace"
+  },
+  "aroma": {
+    "es": "Vainilla y algodón",
+    "en": "Vanilla and cotton"
+  },
+  "phrase": {
+    "es": "Hay presencias que se quedan en los pequeños gestos.",
+    "en": "Some presences stay in the small gestures."
+  },
+  "image": "../../assets/images/candle-jar-flowers.webp",
+  "imageAlt": {
+    "es": "Vela Thial en frasco de vidrio junto a flores lilas.",
+    "en": "A Thial candle in a glass jar next to lilac flowers."
+  },
+  "placeholder": true
+}

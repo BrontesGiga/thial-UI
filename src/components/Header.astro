@@ -1,0 +1,131 @@
+---
+import Logo from "../assets/logo/thial-logo.svg";
+import type { Dictionary } from "../i18n/utils";
+
+interface Props {
+  nav: Dictionary["nav"];
+  homeHref: string;
+  switchHref: string;
+  switchLang: string;
+}
+const { nav, homeHref, switchHref, switchLang } = Astro.props;
+
+const items = [
+  { id: "essence", label: nav.essence },
+  { id: "values", label: nav.values },
+  { id: "collections", label: nav.collections },
+  { id: "candles", label: nav.candles },
+  { id: "faq", label: nav.faq },
+  { id: "buy", label: nav.buy },
+];
+---
+
+<a class="skip-link" href="#main">
+  {nav.skip}
+</a>
+<header class="header">
+  <div class="inner">
+    <a class="home" href={homeHref} aria-label={nav.homeLabel}>
+      <Logo class="logo" aria-hidden="true" />
+    </a>
+    <nav aria-label={nav.label}>
+      <ul>
+        {items.map((item) => (
+          <li>
+            <a href={`#${item.id}`}>{item.label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+    <a
+      class="lang"
+      href={switchHref}
+      hreflang={switchLang}
+      lang={switchLang}
+      aria-label={nav.switchLabel}
+      data-lang-switch
+    >
+      {nav.switchTo}
+    </a>
+  </div>
+</header>
+
+<script>
+  // Keep the current section when switching language.
+  document
+    .querySelector<HTMLAnchorElement>("[data-lang-switch]")
+    ?.addEventListener("click", (event) => {
+      const link = event.currentTarget as HTMLAnchorElement;
+      if (location.hash) link.hash = location.hash;
+    });
+</script>
+
+<style>
+  .skip-link {
+    position: absolute;
+    left: var(--space-s);
+    top: -3rem;
+    z-index: 20;
+    padding: var(--space-xs) var(--space-s);
+    background: var(--color-ivory);
+  }
+  .skip-link:focus {
+    top: var(--space-s);
+  }
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: color-mix(in srgb, var(--color-ivory) 92%, transparent);
+    backdrop-filter: blur(6px);
+    border-bottom: var(--rule);
+  }
+  .inner {
+    display: flex;
+    align-items: center;
+    gap: var(--space-m);
+    max-width: var(--page-max);
+    margin-inline: auto;
+    padding: var(--space-s) var(--gutter);
+  }
+  .home {
+    color: var(--color-raspberry);
+  }
+  .logo {
+    width: 5.5rem;
+    height: auto;
+  }
+  nav {
+    margin-inline-start: auto;
+  }
+  ul {
+    display: flex;
+    gap: var(--space-m);
+    padding: 0;
+    list-style: none;
+  }
+  nav a,
+  .lang {
+    color: var(--color-text);
+    font-family: var(--font-secondary);
+    font-size: var(--text-sm);
+    text-decoration: none;
+  }
+  nav a:hover,
+  .lang:hover {
+    color: var(--color-accent);
+  }
+  .lang {
+    margin-inline-start: var(--space-s);
+    padding-inline-start: var(--space-m);
+    border-left: var(--rule);
+  }
+  @media (max-width: 56rem) {
+    nav {
+      display: none;
+    }
+    .lang {
+      margin-inline-start: auto;
+    }
+  }
+</style>

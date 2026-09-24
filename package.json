@@ -1,0 +1,37 @@
+{
+  "name": "thial-ui",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "format": "prettier --write .",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@fontsource/cormorant-garamond": "^5.3.0",
+    "@fontsource/lora": "^5.3.0",
+    "@fontsource/prata": "^5.3.0",
+    "astro": "^7.3.4"
+  },
+  "allowScripts": {
+    "esbuild": true
+  },
+  "private": true,
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.63.0",
+    "prettier": "^3.9.9",
+    "prettier-plugin-astro": "^1.0.1",
+    "typescript": "^6.0.3",
+    "vitest": "^5.0.1"
+  }
+}

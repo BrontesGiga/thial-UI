@@ -1,0 +1,90 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+export interface CollectionItem {
+  id: string;
+  name: string;
+  description: string;
+  image: ImageMetadata;
+  imageAlt: string;
+}
+
+interface Props {
+  title: string;
+  intro: string;
+  thread: string;
+  items: CollectionItem[];
+}
+const { title, intro, thread, items } = Astro.props;
+---
+
+<section id="collections" class="section" aria-labelledby="collections-title">
+  <div>
+    <h2 id="collections-title" class="section-title">
+      {title}
+    </h2>
+    <p class="intro">{intro}</p>
+    <ul>
+      {items.map((item, i) => (
+        <li>
+          <Image
+            src={item.image}
+            alt={item.imageAlt}
+            widths={[320, 640]}
+            sizes="(max-width: 40rem) 50vw, 25vw"
+          />
+          <span class="number" aria-hidden="true">
+            {String(i + 1).padStart(2, "0")}
+          </span>
+          <h3>{item.name}</h3>
+          <p>{item.description}</p>
+        </li>
+      ))}
+    </ul>
+    <p class="thread">{thread}</p>
+  </div>
+</section>
+
+<style>
+  .intro,
+  .thread {
+    max-width: var(--measure);
+    margin-inline: auto;
+    text-align: center;
+  }
+  .thread {
+    margin-top: var(--space-l);
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--text-lg);
+  }
+  ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(9rem, 100%), 1fr));
+    gap: var(--space-l);
+    margin-top: var(--space-l);
+    padding: 0;
+    list-style: none;
+  }
+  li {
+    text-align: center;
+  }
+  img {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+  }
+  .number {
+    display: block;
+    margin-top: var(--space-s);
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+  }
+  h3 {
+    font-size: var(--text-xl);
+  }
+  p {
+    font-size: var(--text-sm);
+  }
+</style>

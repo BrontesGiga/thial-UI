@@ -1,0 +1,22 @@
+{
+  "order": 3,
+  "collection": "lugares",
+  "name": {
+    "es": "Muelle al atardecer",
+    "en": "Pier at Dusk"
+  },
+  "aroma": {
+    "es": "Brisa marina y madera",
+    "en": "Sea breeze and driftwood"
+  },
+  "phrase": {
+    "es": "Hay lugares que se quedan con nosotros.",
+    "en": "Some places stay with us."
+  },
+  "image": "../../assets/images/candle-jar-lid.webp",
+  "imageAlt": {
+    "es": "Vela Thial con tapa de madera sobre una piedra, rodeada de flores blancas.",
+    "en": "A Thial candle with a wooden lid on a stone, surrounded by white flowers."
+  },
+  "placeholder": true
+}
