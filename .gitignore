@@ -14,3 +14,9 @@ dist/
 # Test output
 test-results/
 playwright-report/
+
+# Logs and env
+npm-debug.log*
+.env
+.env.production
+.DS_Store
