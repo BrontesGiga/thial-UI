@@ -1,0 +1,138 @@
+{
+  "meta": {
+    "title": "Thial · Velas artesanales que transforman historias en aromas",
+    "description": "Thial crea velas artesanales inspiradas en personas, lugares, momentos y experiencias. Historias que se pueden sentir."
+  },
+  "nav": {
+    "label": "Navegación principal",
+    "skip": "Saltar al contenido",
+    "essence": "Esencia",
+    "values": "Valores",
+    "collections": "Colecciones",
+    "candles": "Velas",
+    "faq": "Preguntas",
+    "buy": "Cómo comprar",
+    "switchTo": "English",
+    "switchLabel": "Ver esta página en inglés",
+    "homeLabel": "Thial, inicio"
+  },
+  "hero": {
+    "tagline": "Historias que se pueden sentir.",
+    "concept": "Tu historia todavía se está escribiendo.",
+    "intro": "Creamos velas artesanales que transforman historias, lugares y momentos en aromas.",
+    "cta": "Descubre las colecciones",
+    "imageAlt": "Vela Thial encendida en un recipiente de cerámica pintado a mano, junto a su caja."
+  },
+  "essence": {
+    "title": "Esencia de Thial",
+    "paragraphs": [
+      "Thial nace de una idea: nuestra historia está hecha de momentos que nos transforman. De personas, lugares, experiencias e instantes que dejan huella y se convierten en recuerdos.",
+      "Queremos que cada persona que encienda una vela pueda encontrarse con algo propio: un recuerdo, una emoción, un lugar, alguien especial o simplemente una sensación difícil de explicar."
+    ],
+    "quote": "La historia es de Thial, pero el significado puede ser de quien la recibe.",
+    "items": [
+      {
+        "title": "Concepto",
+        "text": "Tu historia todavía se está escribiendo."
+      },
+      {
+        "title": "Filosofía",
+        "text": "Aprender a vivir mientras seguimos descubriendo quiénes somos."
+      },
+      {
+        "title": "Propósito",
+        "text": "Que los recuerdos, experiencias y aprendizajes puedan volver a sentirse a través de los aromas, dejando espacio para que cada persona encuentre algo propio."
+      },
+      {
+        "title": "Promesa",
+        "text": "Inspirarte a mirar lo vivido, descubrir qué te dejó y seguir escribiendo tu propia historia."
+      }
+    ]
+  },
+  "values": {
+    "title": "Valores de la marca",
+    "items": [
+      {
+        "name": "Conexión",
+        "text": "El puente entre la historia de Thial y la historia personal de quien experimenta el aroma."
+      },
+      {
+        "name": "Autenticidad",
+        "text": "Las colecciones nacen de historias y experiencias reales, contadas desde un lugar genuino."
+      },
+      {
+        "name": "Creatividad",
+        "text": "Transformamos historias, lugares y emociones en aromas y experiencias que puedan sentirse."
+      },
+      {
+        "name": "Sensibilidad",
+        "text": "Observamos y valoramos los pequeños momentos capaces de convertirse en recuerdos."
+      },
+      {
+        "name": "Significado",
+        "text": "Cada vela es más que bonita o aromática: tiene algo que contar y algo que dejar."
+      }
+    ]
+  },
+  "collections": {
+    "title": "Colecciones",
+    "intro": "Organizamos nuestras velas según el origen de sus historias.",
+    "thread": "De esta persona aprendí… / Esta experiencia me dejó…"
+  },
+  "candles": {
+    "title": "Velas",
+    "question": "¿Qué historia te recuerda este aroma?",
+    "intro": "Cada vela tiene un nombre, un aroma, una frase y una tarjeta que cuenta qué la inspiró.",
+    "aromaLabel": "Aroma",
+    "placeholderNote": "Nombres y aromas de ejemplo mientras preparamos las colecciones."
+  },
+  "faq": {
+    "title": "Preguntas frecuentes",
+    "items": [
+      {
+        "question": "¿Las velas son personalizadas?",
+        "answer": "No. Cada historia nace de Thial y de las experiencias que inspiraron a su fundadora. Quien recibe la vela puede encontrar en ella una conexión propia."
+      },
+      {
+        "question": "¿Qué incluye cada vela?",
+        "answer": "Cada vela llega con su nombre, su aroma, una frase breve y una tarjeta que cuenta qué la inspiró y qué dejó esa historia."
+      },
+      {
+        "question": "¿Cómo están organizadas las colecciones?",
+        "answer": "Por el origen de sus historias: personas, lugares, momentos y experiencias."
+      },
+      {
+        "question": "¿Cómo cuido mi vela?",
+        "answer": "En el primer encendido, deja que la cera se derrita hasta los bordes. Recorta la mecha antes de cada uso y nunca dejes la vela encendida sin supervisión."
+      },
+      {
+        "question": "¿Cómo hago un pedido?",
+        "answer": "Escríbenos por Instagram o WhatsApp. Te contamos qué velas están disponibles y las opciones de entrega."
+      }
+    ]
+  },
+  "buy": {
+    "title": "Cómo comprar",
+    "intro": "Por ahora atendemos cada pedido de forma personal.",
+    "steps": [
+      {
+        "title": "Elige tu vela",
+        "text": "Explora las colecciones y encuentra la historia que te llame."
+      },
+      {
+        "title": "Escríbenos",
+        "text": "Envíanos un mensaje por Instagram o WhatsApp con la vela que elegiste."
+      },
+      {
+        "title": "Recíbela",
+        "text": "Acordamos juntos el pago y la entrega."
+      }
+    ],
+    "instagram": "Escríbenos por Instagram",
+    "whatsapp": "Escríbenos por WhatsApp"
+  },
+  "footer": {
+    "tagline": "Historias que se pueden sentir.",
+    "rights": "Todos los derechos reservados."
+  }
+}
