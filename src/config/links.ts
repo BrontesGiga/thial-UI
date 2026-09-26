@@ -1,5 +1,5 @@
-// TODO: replace with the real Instagram profile and WhatsApp link (https://wa.me/<number>).
+// TODO: replace with the real WhatsApp link (https://wa.me/<number>).
 export const links = {
-  instagram: "#",
+  instagram: "https://www.instagram.com/thial_candle",
   whatsapp: "#",
 } as const;
