@@ -20,3 +20,6 @@ npm-debug.log*
 .env
 .env.production
 .DS_Store
+
+# Lighthouse Chrome profile (created by Windows paths under WSL)
+*lighthouse.*/
