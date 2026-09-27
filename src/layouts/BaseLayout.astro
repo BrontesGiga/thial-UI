@@ -14,9 +14,11 @@ interface Props {
   locale: Locale;
   title: string;
   description: string;
+  path?: string;
+  noindex?: boolean;
 }
-const { locale, title, description } = Astro.props;
-const canonical = new URL(localizedPath(locale), Astro.site);
+const { locale, title, description, path = "/", noindex = false } = Astro.props;
+const canonical = new URL(localizedPath(locale, path), Astro.site);
 ---
 
 <!doctype html>
@@ -26,19 +28,20 @@ const canonical = new URL(localizedPath(locale), Astro.site);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={canonical} />
     {locales.map((l) => (
       <link
         rel="alternate"
         hreflang={l}
-        href={new URL(localizedPath(l), Astro.site)}
+        href={new URL(localizedPath(l, path), Astro.site)}
       />
     ))}
     <link
       rel="alternate"
       hreflang="x-default"
-      href={new URL(localizedPath("es"), Astro.site)}
+      href={new URL(localizedPath("es", path), Astro.site)}
     />
   </head>
   <body>
