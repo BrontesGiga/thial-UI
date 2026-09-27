@@ -1,0 +1,54 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { getDictionary, localizedPath } from "../i18n/utils";
+
+const locale = "es";
+const t = getDictionary(locale);
+---
+
+<BaseLayout
+  locale={locale}
+  title={t.notFound.title}
+  description={t.notFound.text}
+  noindex
+>
+  <Header
+    nav={t.nav}
+    homeHref={localizedPath(locale)}
+    switchHref={localizedPath("en")}
+    switchLang="en"
+    cartHref={localizedPath(locale, "/cart/")}
+  />
+  <main id="main">
+    <section class="section" aria-labelledby="not-found-title">
+      <div>
+        <h1 id="not-found-title">{t.notFound.title}</h1>
+        <p>{t.notFound.text}</p>
+        <p class="en">Page not found.</p>
+        <p class="links">
+          <a href="/">{t.notFound.home}</a> · <a href="/en/">Home (English)</a>
+        </p>
+      </div>
+    </section>
+  </main>
+  <Footer footer={t.footer} />
+</BaseLayout>
+
+<style>
+  section > div {
+    max-width: var(--measure);
+    text-align: center;
+  }
+  h1 {
+    margin-bottom: var(--space-m);
+  }
+  .en {
+    color: var(--color-sage);
+    font-style: italic;
+  }
+  .links {
+    margin-top: var(--space-l);
+  }
+</style>
