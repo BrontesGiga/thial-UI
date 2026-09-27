@@ -28,12 +28,14 @@ const { title, intro, thread, items } = Astro.props;
     <ul>
       {items.map((item, i) => (
         <li>
-          <Image
-            src={item.image}
-            alt={item.imageAlt}
-            widths={[320, 640]}
-            sizes="(max-width: 40rem) 50vw, 25vw"
-          />
+          <div class="frame">
+            <Image
+              src={item.image}
+              alt={item.imageAlt}
+              widths={[320, 640]}
+              sizes="(max-width: 40rem) 50vw, 25vw"
+            />
+          </div>
           <span class="number" aria-hidden="true">
             {String(i + 1).padStart(2, "0")}
           </span>
@@ -70,19 +72,59 @@ const { title, intro, thread, items } = Astro.props;
   li {
     text-align: center;
   }
+  .frame {
+    overflow: hidden;
+    border-radius: 0.5rem;
+    transition: box-shadow 0.25s ease;
+  }
+  li:hover .frame,
+  li:focus-within .frame {
+    box-shadow: 0 0.75rem 1.5rem -0.5rem rgb(0 0 0 / 25%);
+  }
   img {
     width: 100%;
     aspect-ratio: 4 / 5;
     object-fit: cover;
+    object-position: center;
+    transform: scale(1.1);
+    transition: transform 0.25s ease;
+  }
+  li:hover img,
+  li:focus-within img {
+    transform: scale(1.16);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .frame,
+    img {
+      transition: none;
+    }
+    li:hover img,
+    li:focus-within img {
+      transform: none;
+    }
   }
   .number {
     display: block;
     margin-top: var(--space-s);
     font-family: var(--font-display);
     font-size: var(--text-lg);
+    transition: color 0.25s ease;
   }
   h3 {
     font-size: var(--text-xl);
+    transition: color 0.25s ease;
+  }
+  li:hover .number,
+  li:focus-within .number,
+  li:hover h3,
+  li:focus-within h3 {
+    color: var(--color-accent);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .number,
+    h3 {
+      transition: none;
+    }
   }
   p {
     font-size: var(--text-sm);

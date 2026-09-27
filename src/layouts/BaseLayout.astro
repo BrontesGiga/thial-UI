@@ -43,5 +43,41 @@ const canonical = new URL(localizedPath(locale), Astro.site);
   </head>
   <body>
     <slot />
+    <script>
+      const reduceMotion = matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+
+      if (!reduceMotion && "IntersectionObserver" in window) {
+        const groups = document.querySelectorAll<HTMLElement>(
+          ".section ul, .section ol, .section .items, .section .wrap",
+        );
+        groups.forEach((group) => {
+          Array.from(group.children).forEach((child, i) => {
+            const el = child as HTMLElement;
+            el.classList.add("js-reveal");
+            el.style.setProperty("--reveal-delay", `${Math.min(i, 5) * 80}ms`);
+          });
+        });
+        document
+          .querySelectorAll(".section-title")
+          .forEach((el) => el.classList.add("js-reveal"));
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.15, rootMargin: "0px 0px -10% 0px" },
+        );
+        document
+          .querySelectorAll(".js-reveal")
+          .forEach((el) => observer.observe(el));
+      }
+    </script>
   </body>
 </html>

@@ -48,12 +48,30 @@ const { essence } = Astro.props;
     margin-top: var(--space-xl);
     text-align: center;
   }
+  .item {
+    transition: transform 0.25s ease;
+  }
+  .item:hover,
+  .item:focus-within {
+    transform: translateY(-0.25rem);
+  }
   dt {
     font-family: var(--font-display);
     font-size: var(--text-xl);
+    transition: color 0.25s ease;
+  }
+  .item:hover dt,
+  .item:focus-within dt {
+    color: var(--color-accent);
   }
   dd {
     margin-top: var(--space-s);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .item,
+    dt {
+      transition: none;
+    }
   }
   blockquote {
     max-width: var(--measure);

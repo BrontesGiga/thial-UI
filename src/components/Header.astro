@@ -28,37 +28,39 @@ const items = [
     <a class="home" href={homeHref} aria-label={nav.homeLabel}>
       <Logo class="logo" aria-hidden="true" />
     </a>
-    <button
-      class="menu-toggle"
-      type="button"
-      aria-expanded="false"
-      aria-controls="site-nav"
-      data-menu-toggle
-    >
-      <svg
-        viewBox="0 0 20 14"
-        width="20"
-        height="14"
-        aria-hidden="true"
-        focusable="false"
+    <div class="menu">
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="site-nav"
+        data-menu-toggle
       >
-        <path
-          d="M0 1h20M0 7h20M0 13h20"
-          stroke="currentColor"
-          stroke-width="1.5"
-        ></path>
-      </svg>
-      {nav.menu}
-    </button>
-    <nav id="site-nav" aria-label={nav.label}>
-      <ul>
-        {items.map((item) => (
-          <li>
-            <a href={`#${item.id}`}>{item.label}</a>
-          </li>
-        ))}
-      </ul>
-    </nav>
+        <svg
+          viewBox="0 0 20 14"
+          width="20"
+          height="14"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path
+            d="M0 1h20M0 7h20M0 13h20"
+            stroke="currentColor"
+            stroke-width="1.5"
+          ></path>
+        </svg>
+        {nav.menu}
+      </button>
+      <nav id="site-nav" aria-label={nav.label}>
+        <ul>
+          {items.map((item) => (
+            <li>
+              <a href={`#${item.id}`}>{item.label}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
     <a
       class="lang"
       href={switchHref}
@@ -146,6 +148,16 @@ const items = [
   .logo {
     width: 5.5rem;
     height: auto;
+    transition: transform 0.25s ease;
+  }
+  .home:hover .logo,
+  .home:focus-visible .logo {
+    transform: scale(1.06);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .logo {
+      transition: none;
+    }
   }
   nav {
     margin-inline-start: auto;
@@ -163,11 +175,38 @@ const items = [
     font-family: var(--font-secondary);
     font-size: var(--text-sm);
     text-decoration: none;
+    transition:
+      color 0.2s ease,
+      transform 0.2s ease;
   }
   nav a:hover,
   .lang:hover,
-  .menu-toggle:hover {
+  .menu-toggle:hover,
+  nav a:focus-visible,
+  .lang:focus-visible,
+  .menu-toggle:focus-visible {
     color: var(--color-accent);
+  }
+  .lang:hover,
+  .menu-toggle:hover {
+    transform: translateY(-0.1rem);
+  }
+  nav a:hover,
+  nav a:focus-visible {
+    transform: translateX(0.2rem);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    nav a,
+    .lang,
+    .menu-toggle {
+      transition: none;
+    }
+    .lang:hover,
+    .menu-toggle:hover,
+    nav a:hover,
+    nav a:focus-visible {
+      transform: none;
+    }
   }
   .lang {
     margin-inline-start: var(--space-s);
@@ -184,6 +223,64 @@ const items = [
     border: 0;
     cursor: pointer;
   }
+  .menu {
+    position: relative;
+    order: 1;
+    width: 100%;
+    margin-inline-start: 0;
+  }
+  /* No JS: links stay visible as a wrapped row under the logo. */
+  ul {
+    flex-wrap: wrap;
+    gap: var(--space-xs) var(--space-m);
+  }
+  /* With JS: menu button opens a dropdown panel anchored to itself, desktop and mobile alike. */
+  .header[data-menu] .menu {
+    order: 0;
+    width: auto;
+    margin-inline-start: auto;
+  }
+  .header[data-menu] .menu-toggle {
+    display: inline-flex;
+  }
+  .header[data-menu] .lang {
+    margin-inline-start: var(--space-xs);
+  }
+  .header[data-menu] nav {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    min-width: 12rem;
+    width: max-content;
+    background: var(--color-bg);
+    border: var(--rule);
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem -0.5rem rgb(0 0 0 / 15%);
+    opacity: 0;
+    transform: translateY(-0.5rem);
+    pointer-events: none;
+    transition:
+      opacity 0.18s ease,
+      transform 0.18s ease;
+  }
+  .header[data-menu="open"] nav {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+  .header[data-menu="closed"] nav {
+    display: none;
+  }
+  .header[data-menu] ul {
+    flex-direction: column;
+    gap: 0;
+    padding: var(--space-xs) var(--gutter) var(--space-s);
+  }
+  .header[data-menu] nav a {
+    display: flex;
+    align-items: center;
+    min-height: 2.75rem;
+  }
   @media (max-width: 56rem) {
     .inner {
       flex-wrap: wrap;
@@ -193,44 +290,8 @@ const items = [
       margin-inline-start: auto;
       padding-inline-start: var(--space-s);
     }
-    /* No JS: show the links as a wrapped row under the logo. */
-    nav {
-      order: 1;
-      width: 100%;
-      margin-inline-start: 0;
-    }
-    ul {
-      flex-wrap: wrap;
-      gap: var(--space-xs) var(--space-m);
-    }
-    /* With JS: a menu button opens a panel below the header. */
-    .header[data-menu] .menu-toggle {
-      display: inline-flex;
-      margin-inline-start: auto;
-    }
-    .header[data-menu] .lang {
-      margin-inline-start: var(--space-xs);
-    }
     .header[data-menu] nav {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      background: var(--color-bg);
-      border-bottom: var(--rule);
-    }
-    .header[data-menu="closed"] nav {
-      display: none;
-    }
-    .header[data-menu] ul {
-      flex-direction: column;
-      gap: 0;
-      padding: var(--space-xs) var(--gutter) var(--space-s);
-    }
-    .header[data-menu] nav a {
-      display: flex;
-      align-items: center;
-      min-height: 2.75rem;
+      min-width: 10rem;
     }
   }
 </style>

@@ -52,6 +52,10 @@ const { hero } = Astro.props;
   .logo {
     width: min(22rem, 80%);
     color: var(--color-raspberry);
+    transition: transform 0.25s ease;
+  }
+  .logo:hover {
+    transform: scale(1.03);
   }
   .tagline {
     margin-top: var(--space-m);
@@ -89,5 +93,19 @@ const { hero } = Astro.props;
     max-height: 36rem;
     object-fit: cover;
     border-radius: 12rem 12rem 0 0;
+    transition: transform 0.3s ease;
+  }
+  .photo:hover {
+    transform: scale(1.03) translateY(-0.25rem);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .photo,
+    .logo {
+      transition: none;
+    }
+    .photo:hover,
+    .logo:hover {
+      transform: none;
+    }
   }
 </style>
