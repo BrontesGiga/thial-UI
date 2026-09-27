@@ -1,0 +1,36 @@
+---
+import CandleCard, { type CandleItem } from "./CandleCard.astro";
+
+interface Props {
+  items: CandleItem[];
+  aromaLabel: string;
+  addLabel: string;
+  addedLabel: string;
+}
+const { items, aromaLabel, addLabel, addedLabel } = Astro.props;
+---
+
+<ul>
+  {items.map((candle) => (
+    <li>
+      <CandleCard
+        candle={candle}
+        aromaLabel={aromaLabel}
+        addLabel={addLabel}
+        addedLabel={addedLabel}
+      />
+    </li>
+  ))}
+</ul>
+<p class="visually-hidden" role="status" data-cart-status></p>
+
+<style>
+  ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    gap: var(--space-m);
+    margin-top: var(--space-l);
+    padding: 0;
+    list-style: none;
+  }
+</style>

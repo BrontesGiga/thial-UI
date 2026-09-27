@@ -15,7 +15,9 @@
     "menu": "Menú",
     "switchTo": "English",
     "switchLabel": "Ver esta página en inglés",
-    "homeLabel": "Thial, inicio"
+    "homeLabel": "Thial, inicio",
+    "cart": "Carrito",
+    "cartLabel": "Carrito, {count} productos"
   },
   "hero": {
     "tagline": "Historias que se pueden sentir.",
@@ -85,7 +87,41 @@
     "question": "¿Qué historia te recuerda este aroma?",
     "intro": "Cada vela tiene un nombre, un aroma, una frase y una tarjeta que cuenta qué la inspiró.",
     "aromaLabel": "Aroma",
-    "placeholderNote": "Nombres y aromas de ejemplo mientras preparamos las colecciones."
+    "placeholderNote": "Nombres y aromas de ejemplo mientras preparamos las colecciones.",
+    "add": "Añadir al carrito",
+    "added": "¡Añadida!"
+  },
+  "collection": {
+    "back": "← Volver a colecciones",
+    "empty": "Todavía no hay velas en esta colección. Vuelve pronto.",
+    "candlesTitle": "Velas de esta colección"
+  },
+  "cart": {
+    "title": "Tu carrito",
+    "intro": "Revisa tus velas antes de enviar el pedido por WhatsApp.",
+    "empty": "Tu carrito está vacío.",
+    "browse": "Ver colecciones",
+    "total": "Total: {count} velas",
+    "clear": "Vaciar carrito",
+    "remove": "Quitar",
+    "decrease": "Quitar una unidad de {name}",
+    "increase": "Añadir una unidad de {name}",
+    "quantity": "Cantidad de {name}",
+    "checkout": "Pedir por WhatsApp",
+    "sentPrompt": "¿Enviaste tu pedido por WhatsApp?",
+    "sentClear": "Vaciar carrito",
+    "sentKeep": "Mantener",
+    "noscript": "Necesitas JavaScript para usar el carrito. Mientras tanto, escríbenos por WhatsApp.",
+    "message": {
+      "greeting": "¡Hola! Quiero hacer un pedido:",
+      "line": "- {quantity}x {name}",
+      "footer": "(enviado desde {host})"
+    }
+  },
+  "notFound": {
+    "title": "Página no encontrada",
+    "text": "No encontramos lo que buscabas. Quizás la historia siguió por otro camino.",
+    "home": "Volver al inicio"
   },
   "faq": {
     "title": "Preguntas frecuentes",
@@ -108,7 +144,7 @@
       },
       {
         "question": "¿Cómo hago un pedido?",
-        "answer": "Escríbenos por Instagram o WhatsApp. Te contamos qué velas están disponibles y las opciones de entrega."
+        "answer": "Añade las velas que quieras a tu carrito y envía el pedido por WhatsApp con un solo toque. También puedes escribirnos por Instagram si prefieres."
       }
     ]
   },
@@ -122,7 +158,7 @@
       },
       {
         "title": "Escríbenos",
-        "text": "Envíanos un mensaje por Instagram o WhatsApp con la vela que elegiste."
+        "text": "Añádela al carrito y envía tu pedido por WhatsApp con un solo toque."
       },
       {
         "title": "Recíbela",

@@ -43,6 +43,7 @@ const hasPlaceholders = await hasPlaceholderCandles();
     homeHref={localizedPath(locale)}
     switchHref={localizedPath(switchLang)}
     switchLang={switchLang}
+    cartHref={localizedPath(locale, "/cart/")}
   />
   <main id="main">
     <Hero hero={t.hero} />
