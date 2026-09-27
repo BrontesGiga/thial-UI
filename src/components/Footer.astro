@@ -38,6 +38,15 @@ const year = new Date().getFullYear();
   .logo {
     width: 7rem;
     color: var(--color-raspberry);
+    transition: transform 0.25s ease;
+  }
+  .logo:hover {
+    transform: scale(1.06);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .logo {
+      transition: none;
+    }
   }
   .tagline {
     font-family: var(--font-display);

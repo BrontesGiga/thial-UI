@@ -41,13 +41,39 @@ const { candle, aromaLabel } = Astro.props;
     display: flex;
     flex-direction: column;
     height: 100%;
+    overflow: hidden;
     background: var(--color-ivory);
     border: var(--rule);
+    border-radius: 0.5rem;
+  }
+  .card {
+    transition: box-shadow 0.25s ease;
+  }
+  .card:hover,
+  .card:focus-within {
+    box-shadow: 0 0.75rem 1.5rem -0.5rem rgb(0 0 0 / 25%);
   }
   img {
     width: 100%;
     aspect-ratio: 1;
     object-fit: cover;
+    object-position: center;
+    transform: scale(1.08);
+    transition: transform 0.25s ease;
+  }
+  .card:hover img,
+  .card:focus-within img {
+    transform: scale(1.14);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .card,
+    img {
+      transition: none;
+    }
+    .card:hover img,
+    .card:focus-within img {
+      transform: none;
+    }
   }
   .body {
     display: grid;
@@ -63,6 +89,16 @@ const { candle, aromaLabel } = Astro.props;
   }
   h3 {
     font-size: var(--text-lg);
+    transition: color 0.25s ease;
+  }
+  .card:hover h3,
+  .card:focus-within h3 {
+    color: var(--color-accent);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    h3 {
+      transition: none;
+    }
   }
   .aroma {
     font-size: var(--text-sm);

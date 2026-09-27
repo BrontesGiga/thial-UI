@@ -15,11 +15,50 @@ const { faq } = Astro.props;
     {faq.items.map((item) => (
       <details>
         <summary>{item.question}</summary>
-        <p>{item.answer}</p>
+        <div class="panel">
+          <p>{item.answer}</p>
+        </div>
       </details>
     ))}
   </div>
 </section>
+
+<script>
+  document
+    .querySelectorAll<HTMLDetailsElement>(".wrap details")
+    .forEach((details) => {
+      const summary = details.querySelector("summary");
+      const panel = details.querySelector<HTMLElement>(".panel");
+      if (!summary || !panel) return;
+
+      const nextFrame = (fn: () => void) => {
+        requestAnimationFrame(() => requestAnimationFrame(fn));
+      };
+
+      summary.addEventListener("click", (event) => {
+        event.preventDefault();
+        if (details.open) {
+          panel.style.gridTemplateRows = "1fr";
+          nextFrame(() => {
+            panel.style.gridTemplateRows = "0fr";
+          });
+          panel.addEventListener(
+            "transitionend",
+            () => {
+              details.open = false;
+            },
+            { once: true },
+          );
+        } else {
+          details.open = true;
+          panel.style.gridTemplateRows = "0fr";
+          nextFrame(() => {
+            panel.style.gridTemplateRows = "1fr";
+          });
+        }
+      });
+    });
+</script>
 
 <style>
   .wrap {
@@ -39,6 +78,16 @@ const { faq } = Astro.props;
     font-family: var(--font-secondary);
     cursor: pointer;
     list-style: none;
+    transition: color 0.2s ease;
+  }
+  summary:hover,
+  summary:focus-visible {
+    color: var(--color-accent);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    summary {
+      transition: none;
+    }
   }
   summary::-webkit-details-marker {
     display: none;
@@ -53,7 +102,22 @@ const { faq } = Astro.props;
   details[open] summary::after {
     content: "−";
   }
-  details p {
+  .panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    overflow: hidden;
+    transition: grid-template-rows 0.25s ease;
+  }
+  details[open] .panel {
+    grid-template-rows: 1fr;
+  }
+  .panel > p {
+    min-height: 0;
     padding-bottom: var(--space-m);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .panel {
+      transition: none;
+    }
   }
 </style>

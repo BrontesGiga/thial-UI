@@ -40,17 +40,39 @@ const { values } = Astro.props;
     list-style: none;
     text-align: center;
   }
+  li {
+    transition: transform 0.25s ease;
+  }
+  li:hover,
+  li:focus-within {
+    transform: translateY(-0.25rem);
+  }
   .number {
     display: block;
     font-family: var(--font-display);
     font-size: var(--text-2xl);
     line-height: 1;
+    transition: color 0.25s ease;
   }
   h3 {
     margin-top: var(--space-s);
+    transition: color 0.25s ease;
+  }
+  li:hover .number,
+  li:focus-within .number,
+  li:hover h3,
+  li:focus-within h3 {
+    color: var(--color-accent);
   }
   p {
     margin-top: var(--space-xs);
     font-size: var(--text-sm);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    li,
+    .number,
+    h3 {
+      transition: none;
+    }
   }
 </style>
