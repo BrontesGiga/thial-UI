@@ -1,0 +1,124 @@
+---
+import { Image } from "astro:assets";
+import { getEntry } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "./Header.astro";
+import CandleGrid from "./CandleGrid.astro";
+import Footer from "./Footer.astro";
+import {
+  getDictionary,
+  localizedPath,
+  otherLocale,
+  type Locale,
+} from "../i18n/utils";
+import { getCandleItems, hasPlaceholderCandles } from "../lib/content";
+
+interface Props {
+  locale: Locale;
+  id: string;
+}
+const { locale, id } = Astro.props;
+const t = getDictionary(locale);
+const switchLang = otherLocale(locale);
+
+const collection = await getEntry("collections", id);
+if (!collection) {
+  throw new Error(`Unknown collection id "${id}"`);
+}
+
+const name = collection.data.name[locale];
+const candleItems = await getCandleItems(locale, id);
+const hasPlaceholders = await hasPlaceholderCandles(id);
+---
+
+<BaseLayout
+  locale={locale}
+  title={`${name} · Thial`}
+  description={collection.data.description[locale]}
+  path={`/collections/${id}/`}
+>
+  <Header
+    nav={t.nav}
+    homeHref={localizedPath(locale)}
+    switchHref={localizedPath(switchLang, `/collections/${id}/`)}
+    switchLang={switchLang}
+    sectionBase={localizedPath(locale)}
+    cartHref={localizedPath(locale, "/cart/")}
+  />
+  <main id="main">
+    <section class="section" aria-labelledby="collection-title">
+      <div>
+        <a class="back" href={localizedPath(locale, "/#collections")}>
+          {t.collection.back}
+        </a>
+        <h1 id="collection-title" class="section-title">
+          {name}
+        </h1>
+        <p class="description">{collection.data.description[locale]}</p>
+        <div class="frame">
+          <Image
+            src={collection.data.image}
+            alt={collection.data.imageAlt[locale]}
+            widths={[480, 960]}
+            sizes="(max-width: 40rem) 100vw, 50vw"
+          />
+        </div>
+        {candleItems.length > 0 ? (
+          <>
+            <h2 class="candles-title">{t.collection.candlesTitle}</h2>
+            <CandleGrid
+              items={candleItems}
+              aromaLabel={t.candles.aromaLabel}
+              addLabel={t.candles.add}
+              addedLabel={t.candles.added}
+            />
+            {hasPlaceholders && <p class="note">{t.candles.placeholderNote}</p>}
+          </>
+        ) : (
+          <p class="empty">{t.collection.empty}</p>
+        )}
+      </div>
+    </section>
+  </main>
+  <Footer footer={t.footer} />
+</BaseLayout>
+
+<style>
+  .back {
+    display: inline-block;
+    margin-bottom: var(--space-m);
+    font-family: var(--font-secondary);
+    font-size: var(--text-sm);
+  }
+  .description {
+    max-width: var(--measure);
+    margin-inline: auto;
+    text-align: center;
+  }
+  .frame {
+    max-width: 32rem;
+    margin: var(--space-l) auto 0;
+    overflow: hidden;
+    border-radius: 0.5rem;
+  }
+  .frame :global(img) {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: center;
+  }
+  .candles-title {
+    margin-top: var(--space-xl);
+    text-align: center;
+  }
+  .empty,
+  .note {
+    max-width: var(--measure);
+    margin: var(--space-l) auto 0;
+    text-align: center;
+    font-size: var(--text-sm);
+  }
+  .note {
+    font-style: italic;
+  }
+</style>

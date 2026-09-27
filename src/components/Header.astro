@@ -7,8 +7,17 @@ interface Props {
   homeHref: string;
   switchHref: string;
   switchLang: string;
+  sectionBase?: string;
+  cartHref: string;
 }
-const { nav, homeHref, switchHref, switchLang } = Astro.props;
+const {
+  nav,
+  homeHref,
+  switchHref,
+  switchLang,
+  sectionBase = "",
+  cartHref,
+} = Astro.props;
 
 const items = [
   { id: "essence", label: nav.essence },
@@ -55,12 +64,35 @@ const items = [
         <ul>
           {items.map((item) => (
             <li>
-              <a href={`#${item.id}`}>{item.label}</a>
+              <a href={`${sectionBase}#${item.id}`}>{item.label}</a>
             </li>
           ))}
         </ul>
       </nav>
     </div>
+    <a
+      class="cart"
+      href={cartHref}
+      data-cart-link
+      data-label-template={nav.cartLabel}
+    >
+      <svg
+        viewBox="0 0 24 24"
+        width="20"
+        height="20"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <path
+          fill="currentColor"
+          d="M7 4h-2l-.94 2H2v2h1.06l2.76 8.28A2 2 0 0 0 7.72 18H17v-2H7.72l-.33-1H17.4a2 2 0 0 0 1.9-1.37L21 8H6.16l-.5-1.5A1 1 0 0 0 4.72 6H2V4h5Zm11.6 6-1.34 4H8.53L7.2 10ZM9 20a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Zm8 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Z"
+        ></path>
+      </svg>
+      <span class="cart-text">{nav.cart}</span>
+      <span class="badge" data-cart-count hidden>
+        0
+      </span>
+    </a>
     <a
       class="lang"
       href={switchHref}
@@ -111,6 +143,28 @@ const items = [
       if (isOpen() && !header.contains(event.target as Node)) setOpen(false);
     });
   }
+</script>
+
+<script>
+  import { CART_EVENT, CART_KEY, cartCount, readCart } from "../lib/cart";
+
+  const link = document.querySelector<HTMLAnchorElement>("[data-cart-link]");
+  const badge = link?.querySelector<HTMLElement>("[data-cart-count]");
+  const template = link?.dataset.labelTemplate ?? "";
+
+  function updateBadge() {
+    if (!link || !badge) return;
+    const count = cartCount(readCart());
+    badge.textContent = String(count);
+    badge.hidden = count === 0;
+    link.setAttribute("aria-label", template.replace("{count}", String(count)));
+  }
+
+  updateBadge();
+  window.addEventListener(CART_EVENT, updateBadge);
+  window.addEventListener("storage", (event) => {
+    if (event.key === CART_KEY) updateBadge();
+  });
 </script>
 
 <style>
@@ -207,6 +261,40 @@ const items = [
     nav a:focus-visible {
       transform: none;
     }
+  }
+  .cart {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2xs);
+    min-height: 2.75rem;
+    margin-inline-start: var(--space-s);
+    color: var(--color-text);
+  }
+  .header[data-menu] .cart {
+    margin-inline-start: var(--space-xs);
+  }
+  .cart:hover,
+  .cart:focus-visible {
+    color: var(--color-accent);
+  }
+  .cart-text {
+    font-family: var(--font-secondary);
+    font-size: var(--text-sm);
+  }
+  .badge {
+    align-items: center;
+    justify-content: center;
+    min-width: 1.1rem;
+    padding: 0 0.25rem;
+    border-radius: var(--radius);
+    background: var(--color-raspberry);
+    color: var(--color-ivory);
+    font-size: 0.7rem;
+    line-height: 1.6;
+  }
+  .badge:not([hidden]) {
+    display: inline-flex;
   }
   .lang {
     margin-inline-start: var(--space-s);

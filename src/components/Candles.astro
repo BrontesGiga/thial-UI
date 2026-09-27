@@ -1,5 +1,6 @@
 ---
-import CandleCard, { type CandleItem } from "./CandleCard.astro";
+import CandleGrid from "./CandleGrid.astro";
+import type { CandleItem } from "./CandleCard.astro";
 import type { Dictionary } from "../i18n/utils";
 
 interface Props {
@@ -17,13 +18,12 @@ const { candles, items, hasPlaceholders } = Astro.props;
     </h2>
     <p class="question">{candles.question}</p>
     <p class="intro">{candles.intro}</p>
-    <ul>
-      {items.map((candle) => (
-        <li>
-          <CandleCard candle={candle} aromaLabel={candles.aromaLabel} />
-        </li>
-      ))}
-    </ul>
+    <CandleGrid
+      items={items}
+      aromaLabel={candles.aromaLabel}
+      addLabel={candles.add}
+      addedLabel={candles.added}
+    />
     {hasPlaceholders && <p class="note">{candles.placeholderNote}</p>}
   </div>
 </section>
@@ -48,13 +48,5 @@ const { candles, items, hasPlaceholders } = Astro.props;
     margin-top: var(--space-l);
     font-size: var(--text-sm);
     font-style: italic;
-  }
-  ul {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
-    gap: var(--space-m);
-    margin-top: var(--space-l);
-    padding: 0;
-    list-style: none;
   }
 </style>
