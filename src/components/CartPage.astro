@@ -1,0 +1,447 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "./Header.astro";
+import Footer from "./Footer.astro";
+import { links } from "../config/links";
+import {
+  getDictionary,
+  localizedPath,
+  otherLocale,
+  type Locale,
+} from "../i18n/utils";
+import { getCandleItems } from "../lib/content";
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = getDictionary(locale);
+const switchLang = otherLocale(locale);
+
+const allCandles = await getCandleItems(locale);
+const names = Object.fromEntries(allCandles.map((c) => [c.id, c.name]));
+---
+
+<BaseLayout
+  locale={locale}
+  title={`${t.cart.title} · Thial`}
+  description={t.cart.intro}
+  path="/cart/"
+  noindex
+>
+  <Header
+    nav={t.nav}
+    homeHref={localizedPath(locale)}
+    switchHref={localizedPath(switchLang, "/cart/")}
+    switchLang={switchLang}
+    sectionBase={localizedPath(locale)}
+    cartHref={localizedPath(locale, "/cart/")}
+  />
+  <main id="main">
+    <section
+      class="section cart-page"
+      aria-labelledby="cart-title"
+      data-cart-root
+      data-names={JSON.stringify(names)}
+      data-number={links.whatsappNumber}
+      data-greeting={t.cart.message.greeting}
+      data-line-template={t.cart.message.line}
+      data-footer-template={t.cart.message.footer}
+      data-total-template={t.cart.total}
+      data-decrease-template={t.cart.decrease}
+      data-increase-template={t.cart.increase}
+      data-quantity-template={t.cart.quantity}
+      data-remove-label={t.cart.remove}
+    >
+      <div>
+        <h1 id="cart-title">{t.cart.title}</h1>
+        <p class="intro">{t.cart.intro}</p>
+
+        <noscript>
+          <p class="noscript">
+            {t.cart.noscript} <a href={links.whatsapp}>WhatsApp</a>
+          </p>
+        </noscript>
+
+        <div class="empty" data-cart-empty hidden>
+          <p>{t.cart.empty}</p>
+          <a href={localizedPath(locale, "/#collections")}>{t.cart.browse}</a>
+        </div>
+
+        <ul data-cart-list></ul>
+
+        <template data-cart-line-tpl>
+          <li data-cart-line>
+            <span class="name" data-line-name></span>
+            <div class="qty">
+              <button type="button" class="step" data-decrease>
+                −
+              </button>
+              <output data-quantity></output>
+              <button type="button" class="step" data-increase>
+                +
+              </button>
+            </div>
+            <button type="button" class="remove" data-remove>
+              {t.cart.remove}
+            </button>
+          </li>
+        </template>
+
+        <div class="summary" data-cart-summary hidden>
+          <p data-cart-total></p>
+          <button type="button" class="clear" data-clear-cart>
+            {t.cart.clear}
+          </button>
+          <a
+            class="button"
+            data-checkout
+            aria-disabled="true"
+            target="_blank"
+            rel="noopener"
+          >
+            <svg
+              class="icon"
+              viewBox="0 0 24 24"
+              width="18"
+              height="18"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884M20.52 3.449C18.24 1.245 15.24 0 12.045 0 5.463 0 .102 5.36.1 11.943c0 2.107.549 4.163 1.595 5.985L0 24l6.335-1.652a11.882 11.882 0 0 0 5.71 1.447h.006c6.585 0 11.946-5.36 11.949-11.943a11.87 11.87 0 0 0-3.48-8.403"
+              ></path>
+            </svg>
+            {t.cart.checkout}
+          </a>
+        </div>
+
+        <div class="sent" role="status" data-sent-prompt hidden>
+          <p>{t.cart.sentPrompt}</p>
+          <div class="sent-actions">
+            <button type="button" data-sent-clear>
+              {t.cart.sentClear}
+            </button>
+            <button type="button" data-sent-keep>
+              {t.cart.sentKeep}
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer footer={t.footer} />
+</BaseLayout>
+
+<script>
+  import {
+    buildOrderMessage,
+    buildWhatsAppUrl,
+    cartCount,
+    clearCart,
+    readCart,
+    removeItem,
+    setQuantity,
+    writeCart,
+    CART_EVENT,
+    CART_KEY,
+  } from "../lib/cart";
+
+  const root = document.querySelector<HTMLElement>("[data-cart-root]");
+  if (root) {
+    const names: Record<string, string> = JSON.parse(
+      root.dataset.names ?? "{}",
+    );
+    const number = root.dataset.number ?? "";
+    const t = {
+      greeting: root.dataset.greeting ?? "",
+      line: root.dataset.lineTemplate ?? "",
+      footer: root.dataset.footerTemplate ?? "",
+    };
+    const totalTemplate = root.dataset.totalTemplate ?? "";
+    const decreaseTemplate = root.dataset.decreaseTemplate ?? "";
+    const increaseTemplate = root.dataset.increaseTemplate ?? "";
+    const quantityTemplate = root.dataset.quantityTemplate ?? "";
+    const removeLabel = root.dataset.removeLabel ?? "";
+
+    const heading = document.getElementById("cart-title");
+    const list = root.querySelector<HTMLUListElement>("[data-cart-list]");
+    const lineTemplate = root.querySelector<HTMLTemplateElement>(
+      "[data-cart-line-tpl]",
+    );
+    const emptyState = root.querySelector<HTMLElement>("[data-cart-empty]");
+    const summary = root.querySelector<HTMLElement>("[data-cart-summary]");
+    const totalEl = root.querySelector<HTMLElement>("[data-cart-total]");
+    const checkout = root.querySelector<HTMLAnchorElement>("[data-checkout]");
+    const clearButton =
+      root.querySelector<HTMLButtonElement>("[data-clear-cart]");
+    const sentPrompt = root.querySelector<HTMLElement>("[data-sent-prompt]");
+    const sentClear =
+      root.querySelector<HTMLButtonElement>("[data-sent-clear]");
+    const sentKeep = root.querySelector<HTMLButtonElement>("[data-sent-keep]");
+
+    function visibleLines() {
+      return readCart().filter((line) => names[line.id]);
+    }
+
+    function render(focusIndex?: number) {
+      const lines = visibleLines();
+
+      if (!list || !lineTemplate || !emptyState || !summary || !checkout) {
+        return;
+      }
+
+      if (lines.length === 0) {
+        emptyState.hidden = false;
+        summary.hidden = true;
+        list.hidden = true;
+        list.replaceChildren();
+        checkout.removeAttribute("href");
+        checkout.setAttribute("aria-disabled", "true");
+        return;
+      }
+
+      emptyState.hidden = true;
+      summary.hidden = false;
+      list.hidden = false;
+      list.replaceChildren();
+
+      lines.forEach((line) => {
+        const displayName = names[line.id] ?? line.name;
+        const node = lineTemplate.content.cloneNode(true) as DocumentFragment;
+        const li = node.querySelector<HTMLLIElement>("[data-cart-line]");
+        const nameEl = node.querySelector<HTMLElement>("[data-line-name]");
+        const quantityEl = node.querySelector<HTMLElement>("[data-quantity]");
+        const decrease =
+          node.querySelector<HTMLButtonElement>("[data-decrease]");
+        const increase =
+          node.querySelector<HTMLButtonElement>("[data-increase]");
+        const remove = node.querySelector<HTMLButtonElement>("[data-remove]");
+
+        if (li) li.dataset.id = line.id;
+        if (nameEl) nameEl.textContent = displayName;
+        if (quantityEl) quantityEl.textContent = String(line.quantity);
+        decrease?.setAttribute(
+          "aria-label",
+          decreaseTemplate.replace("{name}", displayName),
+        );
+        increase?.setAttribute(
+          "aria-label",
+          increaseTemplate.replace("{name}", displayName),
+        );
+        quantityEl?.setAttribute(
+          "aria-label",
+          quantityTemplate.replace("{name}", displayName),
+        );
+        remove?.setAttribute("aria-label", `${removeLabel} ${displayName}`);
+
+        decrease?.addEventListener("click", () => {
+          const index = lines.findIndex((l) => l.id === line.id);
+          writeCart(setQuantity(readCart(), line.id, line.quantity - 1));
+          render(line.quantity - 1 <= 0 ? index : undefined);
+        });
+        increase?.addEventListener("click", () => {
+          writeCart(setQuantity(readCart(), line.id, line.quantity + 1));
+          render();
+        });
+        remove?.addEventListener("click", () => {
+          const index = lines.findIndex((l) => l.id === line.id);
+          writeCart(removeItem(readCart(), line.id));
+          render(index);
+        });
+
+        list.append(node);
+      });
+
+      const count = cartCount(lines);
+      if (totalEl)
+        totalEl.textContent = totalTemplate.replace("{count}", String(count));
+
+      const message = buildOrderMessage(lines, t, location.host);
+      checkout.href = buildWhatsAppUrl(number, message);
+      checkout.removeAttribute("aria-disabled");
+
+      if (focusIndex !== undefined) {
+        const items = list.querySelectorAll<HTMLLIElement>("[data-cart-line]");
+        const target =
+          items[focusIndex]?.querySelector<HTMLButtonElement>(
+            "[data-increase]",
+          );
+        (target ?? heading)?.focus();
+      }
+    }
+
+    clearButton?.addEventListener("click", () => {
+      clearCart();
+      render();
+      heading?.focus();
+    });
+
+    checkout?.addEventListener("click", (event) => {
+      if (checkout.getAttribute("aria-disabled") === "true") {
+        event.preventDefault();
+        return;
+      }
+      if (sentPrompt) sentPrompt.hidden = false;
+    });
+
+    sentClear?.addEventListener("click", () => {
+      clearCart();
+      if (sentPrompt) sentPrompt.hidden = true;
+      render();
+    });
+    sentKeep?.addEventListener("click", () => {
+      if (sentPrompt) sentPrompt.hidden = true;
+    });
+
+    window.addEventListener(CART_EVENT, () => render());
+    window.addEventListener("storage", (event) => {
+      if (event.key === CART_KEY) render();
+    });
+
+    render();
+  }
+</script>
+
+<style>
+  .cart-page .intro {
+    max-width: var(--measure);
+    margin-inline: auto;
+    text-align: center;
+  }
+  .noscript {
+    max-width: var(--measure);
+    margin: var(--space-m) auto 0;
+    padding: var(--space-s) var(--space-m);
+    background: var(--color-surface);
+    border-radius: 0.5rem;
+    text-align: center;
+    font-size: var(--text-sm);
+  }
+  .empty {
+    max-width: var(--measure);
+    margin: var(--space-l) auto 0;
+    text-align: center;
+  }
+  .empty a {
+    display: inline-block;
+    margin-top: var(--space-s);
+  }
+  ul[data-cart-list] {
+    max-width: var(--measure);
+    margin: var(--space-l) auto 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: var(--space-m);
+  }
+  li[data-cart-line] {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-s);
+    padding: var(--space-s) var(--space-m);
+    border: var(--rule);
+    border-radius: 0.5rem;
+  }
+  .name {
+    flex: 1 1 12rem;
+    font-family: var(--font-secondary);
+  }
+  .qty {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+  }
+  .step {
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    border: var(--rule);
+    border-radius: var(--radius);
+    background: var(--color-ivory);
+    cursor: pointer;
+    font-size: var(--text-lg);
+  }
+  .step:hover {
+    color: var(--color-accent);
+  }
+  output {
+    min-width: 1.5rem;
+    text-align: center;
+  }
+  .remove {
+    min-height: 2.75rem;
+    padding: 0 var(--space-s);
+    border: 0;
+    background: none;
+    color: var(--color-taupe);
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  .summary {
+    max-width: var(--measure);
+    margin: var(--space-l) auto 0;
+    display: grid;
+    gap: var(--space-s);
+    justify-items: center;
+    text-align: center;
+  }
+  .clear {
+    min-height: 2.75rem;
+    padding: 0 var(--space-m);
+    border: var(--rule);
+    border-radius: var(--radius);
+    background: none;
+    cursor: pointer;
+  }
+  .button {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    min-height: 2.75rem;
+    padding: var(--space-xs) var(--space-m);
+    border-radius: var(--radius);
+    background: var(--color-raspberry);
+    color: var(--color-ivory);
+    font-family: var(--font-secondary);
+    font-size: var(--text-sm);
+    text-decoration: none;
+    transition: background-color 0.2s;
+  }
+  .button:hover {
+    background: var(--color-taupe);
+  }
+  .button[aria-disabled="true"] {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .button,
+    .step {
+      transition: none;
+    }
+  }
+  .sent {
+    max-width: var(--measure);
+    margin: var(--space-l) auto 0;
+    padding: var(--space-m);
+    background: var(--color-surface);
+    border-radius: 0.5rem;
+    text-align: center;
+  }
+  .sent-actions {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-s);
+    margin-top: var(--space-s);
+  }
+  .sent-actions button {
+    min-height: 2.75rem;
+    padding: 0 var(--space-m);
+    border: var(--rule);
+    border-radius: var(--radius);
+    background: var(--color-ivory);
+    cursor: pointer;
+  }
+</style>
