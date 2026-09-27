@@ -283,7 +283,6 @@ const items = [
     font-size: var(--text-sm);
   }
   .badge {
-    display: inline-flex;
     align-items: center;
     justify-content: center;
     min-width: 1.1rem;
@@ -293,6 +292,9 @@ const items = [
     color: var(--color-ivory);
     font-size: 0.7rem;
     line-height: 1.6;
+  }
+  .badge:not([hidden]) {
+    display: inline-flex;
   }
   .lang {
     margin-inline-start: var(--space-s);

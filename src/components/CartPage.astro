@@ -333,8 +333,10 @@ const names = Object.fromEntries(allCandles.map((c) => [c.id, c.name]));
     margin: var(--space-l) auto 0;
     padding: 0;
     list-style: none;
-    display: grid;
     gap: var(--space-m);
+  }
+  ul[data-cart-list]:not([hidden]) {
+    display: grid;
   }
   li[data-cart-line] {
     display: flex;
@@ -382,10 +384,12 @@ const names = Object.fromEntries(allCandles.map((c) => [c.id, c.name]));
   .summary {
     max-width: var(--measure);
     margin: var(--space-l) auto 0;
-    display: grid;
     gap: var(--space-s);
     justify-items: center;
     text-align: center;
+  }
+  .summary:not([hidden]) {
+    display: grid;
   }
   .clear {
     min-height: 2.75rem;
