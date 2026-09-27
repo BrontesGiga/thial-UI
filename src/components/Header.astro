@@ -28,7 +28,29 @@ const items = [
     <a class="home" href={homeHref} aria-label={nav.homeLabel}>
       <Logo class="logo" aria-hidden="true" />
     </a>
-    <nav aria-label={nav.label}>
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="site-nav"
+      data-menu-toggle
+    >
+      <svg
+        viewBox="0 0 20 14"
+        width="20"
+        height="14"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <path
+          d="M0 1h20M0 7h20M0 13h20"
+          stroke="currentColor"
+          stroke-width="1.5"
+        ></path>
+      </svg>
+      {nav.menu}
+    </button>
+    <nav id="site-nav" aria-label={nav.label}>
       <ul>
         {items.map((item) => (
           <li>
@@ -58,6 +80,35 @@ const items = [
       const link = event.currentTarget as HTMLAnchorElement;
       if (location.hash) link.hash = location.hash;
     });
+
+  // Mobile menu. Without JS the nav stays visible as a wrapped row.
+  const header = document.querySelector<HTMLElement>(".header");
+  const toggle =
+    document.querySelector<HTMLButtonElement>("[data-menu-toggle]");
+  const nav = document.getElementById("site-nav");
+
+  if (header && toggle && nav) {
+    const setOpen = (open: boolean) => {
+      header.dataset.menu = open ? "open" : "closed";
+      toggle.setAttribute("aria-expanded", String(open));
+    };
+    const isOpen = () => header.dataset.menu === "open";
+
+    setOpen(false);
+    toggle.addEventListener("click", () => setOpen(!isOpen()));
+    nav.addEventListener("click", (event) => {
+      if ((event.target as Element).closest("a")) setOpen(false);
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && isOpen()) {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+    document.addEventListener("click", (event) => {
+      if (isOpen() && !header.contains(event.target as Node)) setOpen(false);
+    });
+  }
 </script>
 
 <style>
@@ -72,12 +123,13 @@ const items = [
   .skip-link:focus {
     top: var(--space-s);
   }
+  /* Opaque on purpose: a translucent, blurred header shows ghost shapes of
+     the content scrolling under it on iOS Safari. */
   .header {
     position: sticky;
     top: 0;
     z-index: 10;
-    background: color-mix(in srgb, var(--color-ivory) 92%, transparent);
-    backdrop-filter: blur(6px);
+    background: var(--color-bg);
     border-bottom: var(--rule);
   }
   .inner {
@@ -105,14 +157,16 @@ const items = [
     list-style: none;
   }
   nav a,
-  .lang {
+  .lang,
+  .menu-toggle {
     color: var(--color-text);
     font-family: var(--font-secondary);
     font-size: var(--text-sm);
     text-decoration: none;
   }
   nav a:hover,
-  .lang:hover {
+  .lang:hover,
+  .menu-toggle:hover {
     color: var(--color-accent);
   }
   .lang {
@@ -120,12 +174,63 @@ const items = [
     padding-inline-start: var(--space-m);
     border-left: var(--rule);
   }
+  .menu-toggle {
+    display: none;
+    align-items: center;
+    gap: var(--space-xs);
+    min-height: 2.75rem;
+    padding: 0 var(--space-xs);
+    background: none;
+    border: 0;
+    cursor: pointer;
+  }
   @media (max-width: 56rem) {
-    nav {
-      display: none;
+    .inner {
+      flex-wrap: wrap;
+      gap: var(--space-s);
     }
     .lang {
       margin-inline-start: auto;
+      padding-inline-start: var(--space-s);
+    }
+    /* No JS: show the links as a wrapped row under the logo. */
+    nav {
+      order: 1;
+      width: 100%;
+      margin-inline-start: 0;
+    }
+    ul {
+      flex-wrap: wrap;
+      gap: var(--space-xs) var(--space-m);
+    }
+    /* With JS: a menu button opens a panel below the header. */
+    .header[data-menu] .menu-toggle {
+      display: inline-flex;
+      margin-inline-start: auto;
+    }
+    .header[data-menu] .lang {
+      margin-inline-start: var(--space-xs);
+    }
+    .header[data-menu] nav {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: var(--color-bg);
+      border-bottom: var(--rule);
+    }
+    .header[data-menu="closed"] nav {
+      display: none;
+    }
+    .header[data-menu] ul {
+      flex-direction: column;
+      gap: 0;
+      padding: var(--space-xs) var(--gutter) var(--space-s);
+    }
+    .header[data-menu] nav a {
+      display: flex;
+      align-items: center;
+      min-height: 2.75rem;
     }
   }
 </style>

@@ -69,3 +69,41 @@ test("language switch keeps the current section", async ({ page }) => {
   await expect(page).toHaveURL(/\/#values$/);
   await expect(page.locator("html")).toHaveAttribute("lang", "es");
 });
+
+test.describe("mobile menu", () => {
+  test.use({ viewport: { width: 375, height: 800 } });
+
+  test("opens, reaches every section and closes", async ({ page }) => {
+    await page.goto("/");
+    const toggle = page.getByRole("button", { name: "Menú" });
+    const nav = page.getByRole("navigation", { name: "Navegación principal" });
+
+    await expect(toggle).toHaveAttribute("aria-expanded", "false");
+    await expect(nav).toBeHidden();
+
+    await toggle.click();
+    await expect(toggle).toHaveAttribute("aria-expanded", "true");
+    for (const id of sectionIds) {
+      await expect(nav.locator(`a[href="#${id}"]`)).toBeVisible();
+    }
+
+    await nav.getByRole("link", { name: "Velas" }).click();
+    await expect(page).toHaveURL(/#candles$/);
+    await expect(nav).toBeHidden();
+
+    await toggle.click();
+    await page.keyboard.press("Escape");
+    await expect(nav).toBeHidden();
+    await expect(toggle).toBeFocused();
+  });
+
+  test("header is opaque", async ({ page }) => {
+    await page.goto("/");
+    const styles = await page.locator("header.header").evaluate((el) => {
+      const s = getComputedStyle(el);
+      return { bg: s.backgroundColor, blur: s.backdropFilter };
+    });
+    expect(styles.bg).toBe("rgb(255, 249, 244)");
+    expect(styles.blur).toBe("none");
+  });
+});

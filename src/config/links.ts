@@ -1,5 +1,4 @@
-// TODO: replace with the real Instagram profile and WhatsApp link (https://wa.me/<number>).
 export const links = {
-  instagram: "#",
-  whatsapp: "#",
+  instagram: "https://www.instagram.com/thial_candle",
+  whatsapp: "https://wa.me/message/KYLX6QTIKMXQJ1",
 } as const;
